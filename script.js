@@ -1,3 +1,203 @@
+// === PRODUCT CATALOG ===
+var products = [
+  { name: "Aura Wireless Headphones", img: "https://images.pexels.com/photos/2741119/pexels-photo-2741119.jpeg?auto=compress&cs=tinysrgb&w=500", price: 89, was: 129, rating: 4.8, reviews: 212, badge: "-30%", badgeClass: "", tags: ["headphones","over-ear","wireless","noise cancelling","bluetooth","tech","audio"] },
+  { name: "Aura Buds Pro", img: "https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=500", price: 74, was: null, rating: 4.7, reviews: 188, badge: "New", badgeClass: "new", tags: ["earbuds","wireless","bluetooth","in-ear","tech","audio"] },
+  { name: "Studio One Over-Ear", img: "https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=500", price: 112, was: null, rating: 4.5, reviews: 64, badge: null, badgeClass: "", tags: ["headphones","over-ear","wired","studio","tech","audio"] },
+  { name: "Lumen Lite Headphones", img: "https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=500", price: 45, was: 53, rating: 4.3, reviews: 41, badge: "-15%", badgeClass: "", tags: ["headphones","wireless","compact","lightweight","tech","audio"] },
+  { name: "Pulse Sport Buds", img: "https://images.pexels.com/photos/393047/pexels-photo-393047.jpeg?auto=compress&cs=tinysrgb&w=500", price: 58, was: null, rating: 4.4, reviews: 97, badge: null, badgeClass: "", tags: ["earbuds","wireless","sport","running","fitness","tech","audio"] },
+  { name: "Voyager Travel Headphones", img: "https://images.pexels.com/photos/4071888/pexels-photo-4071888.jpeg?auto=compress&cs=tinysrgb&w=500", price: 96, was: null, rating: 4.6, reviews: 53, badge: "New", badgeClass: "new", tags: ["headphones","wireless","travel","foldable","noise cancelling","tech","audio"] },
+  { name: "Apex Gaming Headset", img: "https://images.pexels.com/photos/3756879/pexels-photo-3756879.jpeg?auto=compress&cs=tinysrgb&w=500", price: 67, was: null, rating: 4.5, reviews: 130, badge: null, badgeClass: "", tags: ["headset","gaming","wired","microphone","tech","audio"] },
+  { name: "Essential Wireless Headphones", img: "https://images.pexels.com/photos/1591060/pexels-photo-1591060.jpeg?auto=compress&cs=tinysrgb&w=500", price: 28, was: 35, rating: 4.2, reviews: 29, badge: "-20%", badgeClass: "", tags: ["headphones","wireless","budget","cheap","affordable","tech","audio"] },
+  { name: "Echo Mini Smart Speaker", img: "https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=500", price: 59, was: null, rating: 4.6, reviews: 98, badge: "New", badgeClass: "new", tags: ["speaker","smart","voice assistant","bluetooth","home","tech"] },
+  { name: "Pulse Band SE", img: "https://images.pexels.com/photos/393047/pexels-photo-393047.jpeg?auto=compress&cs=tinysrgb&w=500", price: 129, was: null, rating: 4.9, reviews: 340, badge: null, badgeClass: "", tags: ["smartwatch","wearable","fitness","tracker","tech"] },
+  { name: "Lumen Pro Monitor Light", img: "https://images.pexels.com/photos/3756879/pexels-photo-3756879.jpeg?auto=compress&cs=tinysrgb&w=500", price: 49, was: 59, rating: 4.5, reviews: 76, badge: "-15%", badgeClass: "", tags: ["desk lamp","monitor light","led","workspace","home","tech"] },
+  { name: "Snap Wireless Charger", img: "https://images.pexels.com/photos/1591060/pexels-photo-1591060.jpeg?auto=compress&cs=tinysrgb&w=500", price: 28, was: null, rating: 4.3, reviews: 54, badge: null, badgeClass: "", tags: ["charger","wireless","charging pad","qi","tech"] },
+  { name: "Keystroke Mini Keyboard", img: "https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=500", price: 95, was: null, rating: 4.6, reviews: 122, badge: null, badgeClass: "", tags: ["keyboard","mechanical","mini","compact","desk","tech"] },
+  { name: "Voltbrick 10K Power Bank", img: "https://images.pexels.com/photos/4071888/pexels-photo-4071888.jpeg?auto=compress&cs=tinysrgb&w=500", price: 32, was: 40, rating: 4.4, reviews: 67, badge: "-20%", badgeClass: "", tags: ["power bank","charger","battery","portable","travel","tech"] },
+  { name: "Nexus Smart Hub", img: "https://images.pexels.com/photos/4790268/pexels-photo-4790268.jpeg?auto=compress&cs=tinysrgb&w=500", price: 64, was: null, rating: 4.5, reviews: 91, badge: null, badgeClass: "", tags: ["smart home","hub","automation","iot","tech"] },
+  { name: "Oversized Graphic Tee", img: "https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=500", price: 32, was: null, rating: 4.6, reviews: 45, badge: "New", badgeClass: "new", tags: ["t-shirt","shirt","fashion","clothing","graphic","streetwear"] },
+  { name: "Cloudstep Running Shoes", img: "https://images.pexels.com/photos/19090/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=500", price: 74, was: null, rating: 4.5, reviews: 120, badge: "New", badgeClass: "new", tags: ["shoes","sneakers","running","footwear","sports","fitness"] },
+  { name: "Hearth Ceramic Mug Set", img: "https://images.pexels.com/photos/1080696/pexels-photo-1080696.jpeg?auto=compress&cs=tinysrgb&w=500", price: 24, was: 30, rating: 4.4, reviews: 38, badge: "-20%", badgeClass: "", tags: ["mug","ceramic","kitchen","home","drinkware"] }
+];
+
+// === FUZZY SEARCH ===
+function fuzzyMatch(query, text) {
+  query = query.toLowerCase();
+  text = text.toLowerCase();
+  if (text.indexOf(query) !== -1) return true;
+  var words = query.split(/\s+/);
+  for (var i = 0; i < words.length; i++) {
+    if (words[i] && text.indexOf(words[i]) !== -1) return true;
+  }
+  return false;
+}
+
+function levenshtein(a, b) {
+  var m = a.length, n = b.length;
+  var dp = [];
+  for (var i = 0; i <= m; i++) { dp[i] = [i]; }
+  for (var j = 0; j <= n; j++) { dp[0][j] = j; }
+  for (var i = 1; i <= m; i++) {
+    for (var j = 1; j <= n; j++) {
+      var cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      dp[i][j] = Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + cost);
+    }
+  }
+  return dp[m][n];
+}
+
+function searchScore(query, product) {
+  var q = query.toLowerCase();
+  var name = product.name.toLowerCase();
+  var tags = product.tags.join(" ").toLowerCase();
+  var score = 0;
+  if (name === q) return 100;
+  if (name.indexOf(q) !== -1) score += 50;
+  if (tags.indexOf(q) !== -1) score += 30;
+  var words = q.split(/\s+/);
+  for (var i = 0; i < words.length; i++) {
+    if (words[i] && name.indexOf(words[i]) !== -1) score += 20;
+    if (words[i] && tags.indexOf(words[i]) !== -1) score += 10;
+  }
+  if (score === 0) {
+    var nameWords = name.split(/\s+/);
+    for (var i = 0; i < nameWords.length; i++) {
+      for (var j = 0; j < words.length; j++) {
+        if (words[j] && nameWords[i]) {
+          var dist = levenshtein(words[j], nameWords[i]);
+          if (dist <= 2) score += 15 - dist * 5;
+        }
+      }
+    }
+  }
+  if (score === 0) {
+    for (var i = 0; i < words.length; i++) {
+      var tagArr = tags.split(/\s+/);
+      for (var j = 0; j < tagArr.length; j++) {
+        if (words[i] && tagArr[j]) {
+          var dist = levenshtein(words[i], tagArr[j]);
+          if (dist <= 2) score += 10 - dist * 4;
+        }
+      }
+    }
+  }
+  return score;
+}
+
+function searchProducts(query) {
+  if (!query || !query.trim()) return [];
+  var scored = [];
+  for (var i = 0; i < products.length; i++) {
+    var s = searchScore(query, products[i]);
+    if (s > 0) {
+      scored.push({ product: products[i], score: s });
+    }
+  }
+  scored.sort(function(a, b) { return b.score - a.score; });
+  var results = [];
+  for (var i = 0; i < scored.length; i++) {
+    results.push(scored[i].product);
+  }
+  if (results.length === 0) {
+    var q = query.toLowerCase();
+    for (var i = 0; i < products.length; i++) {
+      if (fuzzyMatch(q, products[i].name) || fuzzyMatch(q, products[i].tags.join(" "))) {
+        results.push(products[i]);
+      }
+    }
+  }
+  return results;
+}
+
+function renderProductCard(p) {
+  var badgeHtml = p.badge ? '<span class="prod-badge' + (p.badgeClass ? ' ' + p.badgeClass : '') + '">' + p.badge + '</span>' : '';
+  var wasHtml = p.was ? '<span class="was">$' + p.was + '</span>' : '';
+  var stars = '';
+  var full = Math.floor(p.rating);
+  var half = p.rating % 1 >= 0.5 ? 1 : 0;
+  for (var i = 0; i < full; i++) stars += '\u2605';
+  for (var i = 0; i < half; i++) stars += '\u2605';
+  for (var i = full + half; i < 5; i++) stars += '\u2606';
+  return '<a href="product" class="prod-card">' +
+    '<div class="prod-img">' + badgeHtml +
+    '<span class="wishlist-btn">&#9825;</span>' +
+    '<img src="' + p.img + '" alt="' + p.name + '">' +
+    '</div>' +
+    '<div class="prod-rating">' + stars + ' <strong>' + p.rating + '</strong> (' + p.reviews + ')</div>' +
+    '<h3>' + p.name + '</h3>' +
+    '<div class="prod-price"><span class="now">$' + p.price + '</span>' + wasHtml + '</div>' +
+    '</a>';
+}
+
+// === SEARCH PAGE INIT ===
+function initSearchPage() {
+  var params = new URLSearchParams(window.location.search);
+  var query = params.get("q") || "";
+  var searchInput = document.querySelector(".nav-search input");
+  if (searchInput) searchInput.value = query;
+  var titleEl = document.querySelector(".search-head h1");
+  var countEl = document.querySelector(".result-count");
+  var gridEl = document.querySelector(".prod-grid");
+  if (!gridEl) return;
+  if (!query.trim()) {
+    if (titleEl) titleEl.innerHTML = 'Search Findskart <span>&mdash; enter a term above</span>';
+    if (countEl) countEl.textContent = '';
+    gridEl.innerHTML = "";
+    return;
+  }
+  var results = searchProducts(query);
+  if (titleEl) titleEl.innerHTML = '"' + query.replace(/</g, "&lt;") + '" <span>&mdash; ' + results.length + ' result' + (results.length !== 1 ? 's' : '') + '</span>';
+  if (countEl) countEl.textContent = 'Showing ' + results.length + ' result' + (results.length !== 1 ? 's' : '');
+  document.title = 'Search: "' + query + '" — Findskart';
+  if (results.length === 0) {
+    gridEl.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 0;"><h2 style="font-family:var(--font-display);font-size:24px;text-transform:uppercase;margin-bottom:12px;">No results found</h2><p style="color:var(--gray);font-size:15px;margin-bottom:24px;">Try a different search term, or browse by category.</p><a href="category" style="font-family:var(--font-head);font-weight:600;font-size:14px;border-bottom:2px solid var(--black);padding-bottom:2px;">Browse all products &rarr;</a></div>';
+  } else {
+    var html = "";
+    for (var i = 0; i < results.length; i++) {
+      html += renderProductCard(results[i]);
+    }
+    gridEl.innerHTML = html;
+    var newBtns = gridEl.querySelectorAll(".wishlist-btn");
+    newBtns.forEach(function(btn) {
+      btn.addEventListener("click", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (this.textContent.trim() === "\u2661") {
+          this.textContent = "\u2665";
+          this.style.color = "#C23B22";
+        } else {
+          this.textContent = "\u2661";
+          this.style.color = "";
+        }
+      });
+    });
+  }
+}
+
+// === NAV SEARCH BAR ===
+function initNavSearch() {
+  var forms = document.querySelectorAll(".nav-search");
+  forms.forEach(function(form) {
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      var input = this.querySelector("input");
+      if (input && input.value.trim()) {
+        window.location.href = "/search?q=" + encodeURIComponent(input.value.trim());
+      }
+    });
+    var input = form.querySelector("input");
+    if (input) {
+      input.addEventListener("keydown", function(e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          form.dispatchEvent(new Event("submit"));
+        }
+      });
+    }
+  });
+}
+
+// === MAIN ===
 document.addEventListener('DOMContentLoaded', function() {
 
   // === MOBILE MENU TOGGLE ===
@@ -161,5 +361,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+
+  // === INIT SEARCH ===
+  initSearchPage();
+  initNavSearch();
 
 });
