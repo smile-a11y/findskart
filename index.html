@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Findskart — Find it. Love it.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0D0D0D;--white:#FFFFFF;--paper:#F4F3F1;--line:#E5E3DF;--line-strong:#D6D3CC;--gray:#6B6B68;--gray-dim:#9C9A95;--sale:#C23B22;--font-display:'Archivo Black', sans-serif;--font-head:'Archivo', sans-serif;--font-body:'Inter', sans-serif;--max-w:1280px;--edge: clamp(20px, 5vw, 64px);}
+  *{margin:0;padding:0;box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{background:var(--white);color:var(--black);font-family:var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;} img{max-width:100%;display:block;} ul{list-style:none;}
+  .wrap{max-width:var(--max-w);margin:0 auto;padding-left:var(--edge);padding-right:var(--edge);}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--black);outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){*{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}}
+  .announce{background:var(--black);color:var(--white);text-align:center;font-size:13px;padding:11px 16px;letter-spacing:0.01em;}
+  .announce a{text-decoration:underline;font-weight:600;} .announce a:hover{opacity:0.8;}
+  header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  nav{display:flex;align-items:center;justify-content:space-between;padding-top:20px;padding-bottom:20px;gap:24px;}
+  .logo{font-family:var(--font-display);font-size:22px;letter-spacing:-0.01em;color:var(--black);}
+  .nav-links{display:flex;align-items:center;gap:32px;font-family:var(--font-head);font-weight:500;font-size:15px;}
+  .nav-links a{color:var(--black);display:flex;align-items:center;gap:4px;transition:opacity 0.2s ease;}
+  .nav-links a:hover{opacity:0.55;}
+  .nav-search{flex:1;max-width:340px;display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:100px;padding:11px 18px;font-size:14px;color:var(--gray);}
+  .nav-icons{display:flex;align-items:center;gap:20px;}
+  .icon-btn{width:22px;height:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+  .mobile-toggle{display:none;background:none;border:none;font-size:22px;cursor:pointer;}
+  @media (max-width:980px){.nav-links{display:none;} .nav-search{display:none;} .mobile-toggle{display:block;}}
+  .hero{background:var(--paper);border-bottom:1px solid var(--line);overflow:hidden;}
+  .hero-grid{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;min-height:560px;}
+  .hero-copy{display:flex;flex-direction:column;justify-content:center;padding-top:60px;padding-bottom:60px;padding-left:var(--edge);padding-right:clamp(24px,4vw,56px);}
+  .hero-copy h1{font-family:var(--font-display);font-size:clamp(38px, 5vw, 60px);line-height:1.05;letter-spacing:-0.01em;margin-bottom:22px;text-transform:uppercase;}
+  .hero-copy p{font-size:16px;line-height:1.65;color:var(--gray);max-width:420px;margin-bottom:32px;}
+  .btn-pill{display:inline-flex;align-items:center;gap:8px;background:var(--black);color:var(--white);font-family:var(--font-head);font-weight:600;font-size:15px;padding:16px 34px;border-radius:100px;width:fit-content;transition:transform 0.2s ease, background 0.2s ease;}
+  .btn-pill:hover{transform:translateY(-2px);background:#2A2A28;}
+  .hero-stats{display:flex;gap:40px;margin-top:48px;}
+  .hero-stats div strong{font-family:var(--font-display);font-size:26px;display:block;margin-bottom:4px;}
+  .hero-stats div span{font-size:13px;color:var(--gray);}
+  .hero-photo{position:relative;overflow:hidden;background:#DEDBD3;}
+  .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center 18%;}
+  .hero-spark{position:absolute;top:36px;right:40px;width:34px;height:34px;color:var(--white);z-index:2;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.25));}
+  @media (max-width:900px){.hero-grid{grid-template-columns:1fr;min-height:auto;} .hero-photo{height:380px;order:-1;} .hero-copy{padding-top:40px;padding-bottom:48px;} .hero-stats{gap:28px;flex-wrap:wrap;}}
+  .brand-strip{background:var(--black);padding-top:26px;padding-bottom:26px;overflow:hidden;}
+  .brand-row{display:flex;justify-content:space-between;align-items:center;gap:40px;}
+  .brand-row span{font-family:var(--font-display);color:var(--white);font-size:clamp(18px,2.4vw,28px);opacity:0.85;white-space:nowrap;}
+  @media (max-width:900px){.brand-row{flex-wrap:wrap;justify-content:center;gap:28px 36px;}}
+  .section{padding-top:clamp(56px,7vw,88px);padding-bottom:clamp(56px,7vw,88px);}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;gap:24px;flex-wrap:wrap;}
+  .section-head h2{font-family:var(--font-display);font-size:clamp(26px,3vw,36px);text-transform:uppercase;letter-spacing:-0.01em;}
+  .section-head a{font-family:var(--font-head);font-weight:600;font-size:14px;border-bottom:2px solid var(--black);padding-bottom:2px;white-space:nowrap;}
+  .cat-grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:20px;}
+  .cat-card{position:relative;aspect-ratio:3/3.6;border-radius:16px;overflow:hidden;background:var(--paper);}
+  .cat-card img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;}
+  .cat-card:hover img{transform:scale(1.04);}
+  .cat-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg, transparent, rgba(0,0,0,0.65));color:var(--white);padding:50px 18px 18px;font-family:var(--font-head);font-weight:600;font-size:16px;}
+  @media (max-width:900px){.cat-grid{grid-template-columns:repeat(2,1fr);}}
+  .prod-grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:22px;}
+  .prod-card{display:flex;flex-direction:column;}
+  .prod-img{position:relative;aspect-ratio:1/1.12;background:var(--paper);border-radius:14px;overflow:hidden;margin-bottom:16px;}
+  .prod-img img{width:100%;height:100%;object-fit:cover;}
+  .prod-badge{position:absolute;top:12px;left:12px;background:var(--sale);color:var(--white);font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;letter-spacing:0.02em;}
+  .prod-badge.new{background:var(--black);}
+  .prod-rating{font-size:13px;color:var(--gray);display:flex;align-items:center;gap:6px;margin-bottom:6px;}
+  .prod-rating strong{color:var(--black);}
+  .prod-card h3{font-family:var(--font-head);font-weight:600;font-size:15.5px;margin-bottom:8px;line-height:1.35;}
+  .prod-price{display:flex;align-items:center;gap:10px;font-family:var(--font-head);}
+  .prod-price .now{font-weight:700;font-size:16px;}
+  .prod-price .was{font-size:14px;color:var(--gray-dim);text-decoration:line-through;}
+  @media (max-width:900px){.prod-grid{grid-template-columns:repeat(2,1fr);}}
+  .promo{background:var(--black);color:var(--white);border-radius:20px;padding:clamp(40px,6vw,64px);display:grid;grid-template-columns:1.1fr 0.9fr;align-items:center;gap:40px;overflow:hidden;position:relative;}
+  .promo-copy span{font-family:var(--font-head);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:0.06em;color:var(--gray-dim);display:block;margin-bottom:14px;}
+  .promo-copy h2{font-family:var(--font-display);font-size:clamp(26px,3.4vw,38px);line-height:1.1;text-transform:uppercase;margin-bottom:20px;}
+  .promo-copy p{color:#C9C7C2;font-size:15px;line-height:1.6;max-width:380px;margin-bottom:28px;}
+  .promo-img{border-radius:14px;overflow:hidden;aspect-ratio:4/3.2;}
+  .promo-img img{width:100%;height:100%;object-fit:cover;}
+  @media (max-width:900px){.promo{grid-template-columns:1fr;} .promo-img{order:-1;}}
+  .trust-row{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-top:48px;padding-bottom:48px;}
+  .trust-row div h3{font-family:var(--font-head);font-size:17px;font-weight:700;margin-bottom:10px;}
+  .trust-row div p{font-size:14px;color:var(--gray);line-height:1.6;}
+  @media (max-width:900px){.trust-row{grid-template-columns:1fr;gap:28px;}}
+  .news{text-align:center;max-width:560px;margin:0 auto;}
+  .news h2{font-family:var(--font-display);font-size:clamp(24px,3vw,32px);text-transform:uppercase;margin-bottom:14px;}
+  .news p{color:var(--gray);font-size:15px;margin-bottom:28px;}
+  .news-form{display:flex;gap:10px;}
+  .news-form input{flex:1;border:1px solid var(--line-strong);border-radius:100px;padding:15px 22px;font-size:14px;font-family:var(--font-body);}
+  .news-form input:focus{outline:none;border-color:var(--black);}
+  .news-form button{background:var(--black);color:var(--white);border:none;font-family:var(--font-head);font-weight:600;font-size:14px;padding:15px 28px;border-radius:100px;cursor:pointer;transition:background 0.2s ease;white-space:nowrap;}
+  .news-form button:hover{background:#2A2A28;}
+  .news-success{display:none;background:var(--paper);border-radius:12px;padding:20px;margin-top:16px;font-size:15px;color:var(--black);font-weight:500;}
+  .news-success.show{display:block;}
+  @media (max-width:560px){.news-form{flex-direction:column;}}
+  footer{background:var(--black);color:var(--white);padding-top:64px;padding-bottom:32px;}
+  .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid #2A2A28;}
+  .footer-brand .logo{color:var(--white);margin-bottom:16px;display:block;}
+  .footer-brand p{color:#9C9A95;font-size:14px;line-height:1.65;max-width:280px;}
+  .footer-col h4{font-family:var(--font-head);font-size:13px;letter-spacing:0.03em;text-transform:uppercase;color:#7C7A75;margin-bottom:16px;}
+  .footer-col ul{display:flex;flex-direction:column;gap:11px;}
+  .footer-col a{font-size:14px;color:#C9C7C2;transition:color 0.2s ease;} .footer-col a:hover{color:var(--white);}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;flex-wrap:wrap;gap:16px;}
+  .footer-bottom p{font-size:12px;color:#7C7A75;line-height:1.6;max-width:680px;} .footer-copy{font-size:12px;color:#7C7A75;}
+  @media (max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px;}} @media (max-width:560px){.footer-top{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="announce">Sign up and get 20% off your first order — <a href="#newsletter">Sign up now</a></div>
+<header><nav class="wrap">
+  <a href="index.html" class="logo">FINDSKART</a>
+  <ul class="nav-links">
+    <li><a href="category.html">Shop &#9662;</a></li>
+    <li><a href="category.html">On Sale</a></li>
+    <li><a href="category.html">New Arrivals</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <a href="search.html" class="nav-search" style="text-decoration:none;">&#8981; Search for products...</a>
+  <div class="nav-icons"><span class="icon-btn">&#128722;</span><span class="icon-btn">&#128100;</span></div>
+  <button class="mobile-toggle" aria-label="Open menu">&#9776;</button>
+</nav></header>
+<main>
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <h1>Find more.<br>Spend less.</h1>
+        <p>Findskart rounds up the best deals across fashion, tech, and home — all in one place, so you never have to dig for a good price again.</p>
+        <a href="category.html" class="btn-pill">Shop Now &rarr;</a>
+        <div class="hero-stats">
+          <div><strong>500+</strong><span>Trusted Brands</span></div>
+          <div><strong>10,000+</strong><span>Products Curated</span></div>
+          <div><strong>50,000+</strong><span>Happy Shoppers</span></div>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Two people in stylish streetwear outfits">
+        <svg class="hero-spark" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z"/></svg>
+      </div>
+    </div>
+  </section>
+  <section class="brand-strip">
+    <div class="wrap brand-row"><span>NIKEFY</span><span>ZURA</span><span>TECHLOOP</span><span>URBANE</span><span>CASA &amp; CO</span></div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><h2>Shop by category</h2><a href="category.html">View all &rarr;</a></div>
+      <div class="cat-grid">
+        <a href="category.html" class="cat-card"><img src="https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fashion clothing category"><span class="cat-label">Fashion</span></a>
+        <a href="category.html" class="cat-card"><img src="https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tech and gadgets category"><span class="cat-label">Tech</span></a>
+        <a href="category.html" class="cat-card"><img src="https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Home and living category"><span class="cat-label">Home &amp; Living</span></a>
+        <a href="category.html" class="cat-card"><img src="https://images.pexels.com/photos/19090/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=600" alt="Footwear category"><span class="cat-label">Footwear</span></a>
+      </div>
+    </div>
+  </section>
+  <section class="section" style="background:var(--paper);">
+    <div class="wrap">
+      <div class="section-head"><h2>New arrivals</h2><a href="category.html">View all &rarr;</a></div>
+      <div class="prod-grid">
+        <div class="prod-card"><div class="prod-img"><span class="prod-badge new">New</span><img src="https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Graphic t-shirt"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.6</strong></div><h3>Oversized Graphic Tee</h3><div class="prod-price"><span class="now">$32</span></div></div>
+        <div class="prod-card"><div class="prod-img"><span class="prod-badge">-30%</span><img src="https://images.pexels.com/photos/2741119/pexels-photo-2741119.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Wireless headphones"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9733; <strong>4.8</strong></div><h3>Aura Wireless Headphones</h3><div class="prod-price"><span class="now">$89</span><span class="was">$129</span></div></div>
+        <div class="prod-card"><div class="prod-img"><span class="prod-badge new">New</span><img src="https://images.pexels.com/photos/19090/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=500" alt="Sneakers"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.5</strong></div><h3>Cloudstep Running Shoes</h3><div class="prod-price"><span class="now">$74</span></div></div>
+        <div class="prod-card"><div class="prod-img"><span class="prod-badge">-20%</span><img src="https://images.pexels.com/photos/1080696/pexels-photo-1080696.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Ceramic mug and home decor"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.4</strong></div><h3>Hearth Ceramic Mug Set</h3><div class="prod-price"><span class="now">$24</span><span class="was">$30</span></div></div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <div class="promo">
+        <div class="promo-copy">
+          <span>Limited time</span>
+          <h2>Up to 40% off tech essentials</h2>
+          <p>From headphones to smart home — the gear worth upgrading to, at prices worth grabbing before the deal's gone.</p>
+          <a href="category.html" class="btn-pill" style="background:var(--white);color:var(--black);">Shop the deal &rarr;</a>
+        </div>
+        <div class="promo-img"><img src="https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Tech gadgets flat lay"></div>
+      </div>
+    </div>
+  </section>
+  <section class="section" style="padding-top:0;">
+    <div class="wrap trust-row">
+      <div><h3>Curated, not crammed</h3><p>Every product on Findskart is picked for quality and value — not just listed because it exists.</p></div>
+      <div><h3>Real prices, real deals</h3><p>We link straight to trusted retailers so you always see the actual current price before you buy.</p></div>
+      <div><h3>How we earn</h3><p>Findskart may earn a small commission on purchases made through our links, at no extra cost to you.</p></div>
+    </div>
+  </section>
+  <section class="section" id="newsletter">
+    <div class="wrap news">
+      <h2>Get the best deals first</h2>
+      <p>Join 20,000+ smart shoppers getting the week's best finds before they sell out.</p>
+      <form class="news-form">
+        <input type="email" placeholder="Enter your email" aria-label="Email address" required>
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="news-success"></div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap footer-top">
+  <div class="footer-brand"><a href="index.html" class="logo">FINDSKART</a><p>Your one-stop spot for the best deals across fashion, tech, and home — curated daily so you don't have to search.</p></div>
+  <div class="footer-col"><h4>Shop</h4><ul><li><a href="category.html">Fashion</a></li><li><a href="category.html">Tech</a></li><li><a href="category.html">Home &amp; Living</a></li><li><a href="category.html">Footwear</a></li></ul></div>
+  <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About us</a></li><li><a href="about.html">How it works</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+  <div class="footer-col"><h4>Legal</h4><ul><li><a href="disclosure.html">Affiliate disclosure</a></li><li><a href="privacy.html">Privacy policy</a></li><li><a href="terms.html">Terms of use</a></li></ul></div>
+</div><div class="wrap footer-bottom">
+  <p>Affiliate disclosure: Findskart may earn a commission from purchases made through links on this site, at no extra cost to you. This does not influence which products we feature.</p>
+  <span class="footer-copy">&copy; 2026 FINDSKART</span>
+</div></footer>
+<script src="script.js"></script>
+</body></html>

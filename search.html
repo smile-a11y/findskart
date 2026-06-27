@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search results for "headphones" — Findskart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0D0D0D;--white:#FFFFFF;--paper:#F4F3F1;--line:#E5E3DF;--line-strong:#D6D3CC;--gray:#6B6B68;--gray-dim:#9C9A95;--sale:#C23B22;--font-display:'Archivo Black', sans-serif;--font-head:'Archivo', sans-serif;--font-body:'Inter', sans-serif;--max-w:1280px;--edge: clamp(20px, 5vw, 64px);}
+  *{margin:0;padding:0;box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{background:var(--white);color:var(--black);font-family:var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;} img{max-width:100%;display:block;} ul{list-style:none;}
+  .wrap{max-width:var(--max-w);margin:0 auto;padding-left:var(--edge);padding-right:var(--edge);}
+  a:focus-visible, button:focus-visible, input:focus-visible{outline:2px solid var(--black);outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){*{animation-duration:0.001ms !important;transition-duration:0.001ms !important;}}
+  .announce{background:var(--black);color:var(--white);text-align:center;font-size:13px;padding:11px 16px;} .announce a{text-decoration:underline;font-weight:600;}
+  header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  nav{display:flex;align-items:center;justify-content:space-between;padding-top:20px;padding-bottom:20px;gap:24px;}
+  .logo{font-family:var(--font-display);font-size:22px;letter-spacing:-0.01em;}
+  .nav-links{display:flex;align-items:center;gap:32px;font-family:var(--font-head);font-weight:500;font-size:15px;}
+  .nav-links a:hover{opacity:0.55;}
+  .nav-search{flex:1;max-width:340px;display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:100px;padding:11px 18px;font-size:14px;color:var(--gray);}
+  .nav-search input{background:none;border:none;outline:none;font-family:inherit;font-size:14px;width:100%;color:var(--black);}
+  .nav-icons{display:flex;align-items:center;gap:20px;} .icon-btn{width:22px;height:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+  .mobile-toggle{display:none;background:none;border:none;font-size:22px;cursor:pointer;}
+  @media (max-width:980px){.nav-links{display:none;} .nav-search{display:none;} .mobile-toggle{display:block;}}
+  .search-head{padding-top:40px;padding-bottom:28px;border-bottom:1px solid var(--line);}
+  .search-head .label{font-family:var(--font-head);font-weight:500;font-size:14px;color:var(--gray);margin-bottom:10px;}
+  .search-head h1{font-family:var(--font-display);font-size:clamp(26px,3.4vw,38px);text-transform:uppercase;}
+  .search-head h1 span{color:var(--gray-dim);}
+  .chip-row{display:flex;gap:10px;padding-top:24px;padding-bottom:24px;overflow-x:auto;scrollbar-width:none;}
+  .chip-row::-webkit-scrollbar{display:none;}
+  .chip{flex:0 0 auto;font-size:14px;font-family:var(--font-head);font-weight:500;padding:10px 20px;border:1px solid var(--line-strong);border-radius:100px;white-space:nowrap;cursor:pointer;transition:all 0.2s ease;}
+  .chip.active, .chip:hover{background:var(--black);color:var(--white);border-color:var(--black);}
+  .toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;gap:16px;flex-wrap:wrap;}
+  .result-count{font-size:14px;color:var(--gray);font-family:var(--font-head);}
+  .sort-select{display:flex;align-items:center;gap:8px;font-size:14px;border:1px solid var(--line-strong);border-radius:100px;padding:9px 16px;cursor:pointer;font-family:var(--font-head);font-weight:500;}
+  .prod-grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:22px;padding-top:0;padding-bottom:72px;}
+  .prod-card{display:flex;flex-direction:column;}
+  .prod-img{position:relative;aspect-ratio:1/1.05;background:var(--paper);border-radius:14px;overflow:hidden;margin-bottom:16px;}
+  .prod-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.35s ease;}
+  .prod-card:hover .prod-img img{transform:scale(1.05);}
+  .prod-badge{position:absolute;top:12px;left:12px;background:var(--sale);color:var(--white);font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;} .prod-badge.new{background:var(--black);}
+  .wishlist-btn{position:absolute;top:12px;right:12px;width:34px;height:34px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;}
+  .prod-rating{font-size:13px;color:var(--gray);display:flex;align-items:center;gap:6px;margin-bottom:6px;} .prod-rating strong{color:var(--black);}
+  .prod-card h3{font-family:var(--font-head);font-weight:600;font-size:15.5px;margin-bottom:8px;line-height:1.35;}
+  .prod-price{display:flex;align-items:center;gap:10px;font-family:var(--font-head);} .prod-price .now{font-weight:700;font-size:16px;} .prod-price .was{font-size:14px;color:var(--gray-dim);text-decoration:line-through;}
+  @media (max-width:900px){.prod-grid{grid-template-columns:repeat(2,1fr);}} @media (max-width:560px){.prod-grid{gap:14px;}}
+  footer{background:var(--black);color:var(--white);padding-top:64px;padding-bottom:32px;}
+  .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid #2A2A28;}
+  .footer-brand .logo{color:var(--white);margin-bottom:16px;display:block;} .footer-brand p{color:#9C9A95;font-size:14px;line-height:1.65;max-width:280px;}
+  .footer-col h4{font-family:var(--font-head);font-size:13px;letter-spacing:0.03em;text-transform:uppercase;color:#7C7A75;margin-bottom:16px;}
+  .footer-col ul{display:flex;flex-direction:column;gap:11px;} .footer-col a{font-size:14px;color:#C9C7C2;transition:color 0.2s ease;} .footer-col a:hover{color:var(--white);}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;flex-wrap:wrap;gap:16px;}
+  .footer-bottom p{font-size:12px;color:#7C7A75;line-height:1.6;max-width:680px;} .footer-copy{font-size:12px;color:#7C7A75;}
+  @media (max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px;}} @media (max-width:560px){.footer-top{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="announce">Sign up and get 20% off your first order — <a href="index.html#newsletter">Sign up now</a></div>
+<header><nav class="wrap">
+  <a href="index.html" class="logo">FINDSKART</a>
+  <ul class="nav-links"><li><a href="category.html">Shop &#9662;</a></li><li><a href="category.html">On Sale</a></li><li><a href="category.html">New Arrivals</a></li><li><a href="about.html">About</a></li></ul>
+  <form class="nav-search" onsubmit="return false;">&#8981; <input type="text" value="headphones" aria-label="Search"></form>
+  <div class="nav-icons"><span class="icon-btn">&#128722;</span><span class="icon-btn">&#128100;</span></div>
+  <button class="mobile-toggle" aria-label="Open menu">&#9776;</button>
+</nav></header>
+<main class="wrap">
+  <div class="search-head"><div class="label">Search results</div><h1>"Headphones" <span>&mdash; 14 results</span></h1></div>
+  <div class="chip-row">
+    <span class="chip active">All</span>
+    <span class="chip">Over-ear</span>
+    <span class="chip">Earbuds</span>
+    <span class="chip">Noise cancelling</span>
+    <span class="chip">Under $50</span>
+    <span class="chip">Top rated</span>
+  </div>
+  <div class="toolbar"><span class="result-count">Showing 1&ndash;8 of 14</span><span class="sort-select">Sort by: Most Relevant &#9662;</span></div>
+  <div class="prod-grid">
+    <a href="product.html" class="prod-card"><div class="prod-img"><span class="prod-badge">-30%</span><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/2741119/pexels-photo-2741119.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Aura wireless headphones"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9733; <strong>4.8</strong> (212)</div><h3>Aura Wireless Headphones</h3><div class="prod-price"><span class="now">$89</span><span class="was">$129</span></div></a>
+    <a href="product.html" class="prod-card"><div class="prod-img"><span class="prod-badge new">New</span><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Aura Buds Pro earbuds"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9733; <strong>4.7</strong> (188)</div><h3>Aura Buds Pro</h3><div class="prod-price"><span class="now">$74</span></div></a>
+    <a href="product.html" class="prod-card"><div class="prod-img"><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Over-ear studio headphones"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.5</strong> (64)</div><h3>Studio One Over-Ear</h3><div class="prod-price"><span class="now">$112</span></div></a>
+    <a href="product.html" class="prod-card"><div class="prod-img"><span class="prod-badge">-15%</span><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Compact wireless headphones"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.3</strong> (41)</div><h3>Lumen Lite Headphones</h3><div class="prod-price"><span class="now">$45</span><span class="was">$53</span></div></a>
+    <a href="product.html" class="prod-card"><div class="prod-img"><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/393047/pexels-photo-393047.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Sports wireless earbuds"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.4</strong> (97)</div><h3>Pulse Sport Buds</h3><div class="prod-price"><span class="now">$58</span></div></a>
+    <a href="product.html" class="prod-card"><div class="prod-img"><span class="prod-badge new">New</span><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/4071888/pexels-photo-4071888.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Travel headphones with case"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9733; <strong>4.6</strong> (53)</div><h3>Voyager Travel Headphones</h3><div class="prod-price"><span class="now">$96</span></div></a>
+    <a href="product.html" class="prod-card"><div class="prod-img"><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/3756879/pexels-photo-3756879.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Gaming headset"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.5</strong> (130)</div><h3>Apex Gaming Headset</h3><div class="prod-price"><span class="now">$67</span></div></a>
+    <a href="product.html" class="prod-card"><div class="prod-img"><span class="prod-badge">-20%</span><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/1591060/pexels-photo-1591060.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Budget wireless headphones"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.2</strong> (29)</div><h3>Essential Wireless Headphones</h3><div class="prod-price"><span class="now">$28</span><span class="was">$35</span></div></a>
+  </div>
+</main>
+<footer><div class="wrap footer-top">
+  <div class="footer-brand"><a href="index.html" class="logo">FINDSKART</a><p>Your one-stop spot for the best deals across fashion, tech, and home — curated daily so you don't have to search.</p></div>
+  <div class="footer-col"><h4>Shop</h4><ul><li><a href="category.html">Fashion</a></li><li><a href="category.html">Tech</a></li><li><a href="category.html">Home &amp; Living</a></li><li><a href="category.html">Footwear</a></li></ul></div>
+  <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About us</a></li><li><a href="about.html">How it works</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+  <div class="footer-col"><h4>Legal</h4><ul><li><a href="disclosure.html">Affiliate disclosure</a></li><li><a href="privacy.html">Privacy policy</a></li><li><a href="terms.html">Terms of use</a></li></ul></div>
+</div><div class="wrap footer-bottom">
+  <p>Affiliate disclosure: Findskart may earn a commission from purchases made through links on this site, at no extra cost to you. This does not influence which products we feature.</p>
+  <span class="footer-copy">&copy; 2026 FINDSKART</span>
+</div></footer>
+<script src="script.js"></script>
+</body></html>

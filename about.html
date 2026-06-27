@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Findskart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0D0D0D;--white:#FFFFFF;--paper:#F4F3F1;--line:#E5E3DF;--line-strong:#D6D3CC;--gray:#6B6B68;--gray-dim:#9C9A95;--sale:#C23B22;--font-display:'Archivo Black', sans-serif;--font-head:'Archivo', sans-serif;--font-body:'Inter', sans-serif;--max-w:1280px;--edge: clamp(20px, 5vw, 64px);}
+  *{margin:0;padding:0;box-sizing:border-box;} html{scroll-behavior:smooth;} body{background:var(--white);color:var(--black);font-family:var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;} img{max-width:100%;display:block;} ul{list-style:none;}
+  .wrap{max-width:var(--max-w);margin:0 auto;padding-left:var(--edge);padding-right:var(--edge);}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--black);outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){*{animation-duration:0.001ms !important;transition-duration:0.001ms !important;}}
+  .announce{background:var(--black);color:var(--white);text-align:center;font-size:13px;padding:11px 16px;} .announce a{text-decoration:underline;font-weight:600;}
+  header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  nav{display:flex;align-items:center;justify-content:space-between;padding-top:20px;padding-bottom:20px;gap:24px;}
+  .logo{font-family:var(--font-display);font-size:22px;letter-spacing:-0.01em;}
+  .nav-links{display:flex;align-items:center;gap:32px;font-family:var(--font-head);font-weight:500;font-size:15px;}
+  .nav-links a:hover{opacity:0.55;} .nav-links a.active{border-bottom:2px solid var(--black);padding-bottom:4px;}
+  .nav-search{flex:1;max-width:340px;display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:100px;padding:11px 18px;font-size:14px;color:var(--gray);}
+  .nav-icons{display:flex;align-items:center;gap:20px;} .icon-btn{width:22px;height:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+  .mobile-toggle{display:none;background:none;border:none;font-size:22px;cursor:pointer;}
+  @media (max-width:980px){.nav-links{display:none;}.nav-search{display:none;}.mobile-toggle{display:block;}}
+  .about-hero{padding-top:64px;padding-bottom:56px;border-bottom:1px solid var(--line);}
+  .about-hero .eyebrow{font-family:var(--font-head);font-weight:600;font-size:13px;color:var(--gray);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:18px;}
+  .about-hero h1{font-family:var(--font-display);font-size:clamp(36px,5.5vw,68px);text-transform:uppercase;line-height:1.05;max-width:780px;margin-bottom:24px;}
+  .about-hero p{font-size:17px;line-height:1.7;color:var(--gray);max-width:560px;}
+  .img-band{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;padding-top:48px;padding-bottom:48px;}
+  .img-band .tall{aspect-ratio:16/10;border-radius:16px;overflow:hidden;background:var(--paper);}
+  .img-band .tall img{width:100%;height:100%;object-fit:cover;}
+  .img-band .stat-card{background:var(--black);color:var(--white);border-radius:16px;padding:36px;display:flex;flex-direction:column;justify-content:space-between;}
+  .img-band .stat-card .big{font-family:var(--font-display);font-size:48px;margin-bottom:8px;}
+  .img-band .stat-card .label{font-size:14px;color:#C9C7C2;}
+  @media (max-width:900px){.img-band{grid-template-columns:1fr;}}
+  .story{display:grid;grid-template-columns:1fr 1fr;gap:64px;padding-top:64px;padding-bottom:64px;border-bottom:1px solid var(--line);}
+  .story h2{font-family:var(--font-display);font-size:clamp(26px,3vw,34px);text-transform:uppercase;margin-bottom:20px;}
+  .story p{font-size:15.5px;line-height:1.75;color:var(--gray);margin-bottom:16px;}
+  @media (max-width:900px){.story{grid-template-columns:1fr;gap:32px;}}
+  .values{padding-top:64px;padding-bottom:64px;border-bottom:1px solid var(--line);}
+  .values h2{font-family:var(--font-display);font-size:clamp(26px,3vw,36px);text-transform:uppercase;margin-bottom:40px;}
+  .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
+  .value-item .num{font-family:var(--font-display);font-size:14px;color:var(--gray-dim);margin-bottom:16px;display:block;}
+  .value-item h3{font-family:var(--font-head);font-weight:700;font-size:18px;margin-bottom:10px;}
+  .value-item p{font-size:14.5px;line-height:1.65;color:var(--gray);}
+  @media (max-width:900px){.values-grid{grid-template-columns:1fr;gap:28px;}}
+  .team{padding-top:64px;padding-bottom:64px;border-bottom:1px solid var(--line);}
+  .team h2{font-family:var(--font-display);font-size:clamp(26px,3vw,36px);text-transform:uppercase;margin-bottom:40px;}
+  .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .team-card .photo{aspect-ratio:1;border-radius:14px;overflow:hidden;background:var(--paper);margin-bottom:14px;}
+  .team-card .photo img{width:100%;height:100%;object-fit:cover;}
+  .team-card h4{font-family:var(--font-head);font-weight:700;font-size:15.5px;margin-bottom:4px;}
+  .team-card span{font-size:13px;color:var(--gray);}
+  @media (max-width:900px){.team-grid{grid-template-columns:repeat(2,1fr);}}
+  .about-cta{text-align:center;padding-top:72px;padding-bottom:80px;}
+  .about-cta h2{font-family:var(--font-display);font-size:clamp(26px,3.4vw,38px);text-transform:uppercase;margin-bottom:18px;}
+  .about-cta p{color:var(--gray);font-size:15.5px;max-width:480px;margin:0 auto 28px;}
+  .btn-pill{display:inline-flex;align-items:center;gap:8px;background:var(--black);color:var(--white);font-family:var(--font-head);font-weight:600;font-size:15px;padding:16px 34px;border-radius:100px;transition:transform 0.2s ease, background 0.2s ease;}
+  .btn-pill:hover{transform:translateY(-2px);background:#2A2A28;}
+  footer{background:var(--black);color:var(--white);padding-top:64px;padding-bottom:32px;}
+  .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid #2A2A28;}
+  .footer-brand .logo{color:var(--white);margin-bottom:16px;display:block;}
+  .footer-brand p{color:#9C9A95;font-size:14px;line-height:1.65;max-width:280px;}
+  .footer-col h4{font-family:var(--font-head);font-size:13px;letter-spacing:0.03em;text-transform:uppercase;color:#7C7A75;margin-bottom:16px;}
+  .footer-col ul{display:flex;flex-direction:column;gap:11px;}
+  .footer-col a{font-size:14px;color:#C9C7C2;transition:color 0.2s ease;} .footer-col a:hover{color:var(--white);}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;flex-wrap:wrap;gap:16px;}
+  .footer-bottom p{font-size:12px;color:#7C7A75;line-height:1.6;max-width:680px;} .footer-copy{font-size:12px;color:#7C7A75;}
+  @media (max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px;}} @media (max-width:560px){.footer-top{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="announce">Sign up and get 20% off your first order — <a href="index.html#newsletter">Sign up now</a></div>
+<header><nav class="wrap">
+  <a href="index.html" class="logo">FINDSKART</a>
+  <ul class="nav-links"><li><a href="category.html">Shop</a></li><li><a href="category.html">On Sale</a></li><li><a href="category.html">New Arrivals</a></li><li><a href="about.html" class="active">About</a></li></ul>
+  <a href="search.html" class="nav-search" style="text-decoration:none;">Search for products...</a>
+  <div class="nav-icons"><span class="icon-btn">&#128722;</span><span class="icon-btn">&#128100;</span></div>
+  <button class="mobile-toggle" aria-label="Open menu">&#9776;</button>
+</nav></header>
+<main>
+  <section class="wrap about-hero">
+    <span class="eyebrow">About Findskart</span>
+    <h1>We dig through the noise so you don't have to.</h1>
+    <p>Findskart started as a shared spreadsheet between three friends comparing notes on what was actually worth buying. It's grown, but the question hasn't changed.</p>
+  </section>
+  <section class="wrap img-band">
+    <div class="tall"><img src="https://images.pexels.com/photos/3194519/pexels-photo-3194519.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Team reviewing products together at a desk"></div>
+    <div class="stat-card">
+      <div><div class="big">3,200+</div><div class="label">Products reviewed since 2023</div></div>
+      <div><div class="big">68%</div><div class="label">Products we test that don't make the final list</div></div>
+    </div>
+  </section>
+  <section class="wrap story">
+    <div><h2>Why we built this</h2><p>Every category online has the same problem: a thousand options, most of them mediocre, and a handful of "best of" lists that all recommend the same paid placements.</p><p>We got tired of buying things based on star ratings that didn't match how the product actually performed. So we started keeping our own list — things we'd bought, used, and would tell a friend to get.</p></div>
+    <div><h2>How we pick what's listed</h2><p>Nothing goes on Findskart because a brand asked us to list it. Every product here was either bought and tested by someone on our team, or vetted against verified reviews and return-rate data before we'll feature it.</p><p>If something stops being good — a brand cuts corners, a price quietly creeps up — we pull it. The list is meant to stay honest, not complete.</p></div>
+  </section>
+  <section class="wrap values">
+    <h2>What we actually care about</h2>
+    <div class="values-grid">
+      <div class="value-item"><span class="num">01</span><h3>Honesty over hype</h3><p>We'd rather tell you a popular product is mediocre than pad a list with things that perform well in ads but not in daily use.</p></div>
+      <div class="value-item"><span class="num">02</span><h3>Clear about the money</h3><p>We earn a commission when you buy through our links. We say so plainly, and it never decides what makes the list.</p></div>
+      <div class="value-item"><span class="num">03</span><h3>Fewer picks, better picks</h3><p>We'd rather publish three trustworthy recommendations than thirty mediocre ones padded out for a longer list.</p></div>
+    </div>
+  </section>
+  <section class="wrap team">
+    <h2>The people behind the picks</h2>
+    <div class="team-grid">
+      <div class="team-card"><div class="photo"><img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Portrait of team member"></div><h4>Alex Mercer</h4><span>Co-founder, Tech</span></div>
+      <div class="team-card"><div class="photo"><img src="https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Portrait of team member"></div><h4>Priya Nandan</h4><span>Co-founder, Fashion</span></div>
+      <div class="team-card"><div class="photo"><img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Portrait of team member"></div><h4>Jordan Lee</h4><span>Home & Living</span></div>
+      <div class="team-card"><div class="photo"><img src="https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Portrait of team member"></div><h4>Sam Okafor</h4><span>Editor</span></div>
+    </div>
+  </section>
+  <section class="wrap about-cta">
+    <h2>Got a product we should test?</h2>
+    <p>If you've found something genuinely good that deserves more attention, we want to hear about it.</p>
+    <a href="contact.html" class="btn-pill">Get in touch &rarr;</a>
+  </section>
+</main>
+<footer><div class="wrap footer-top">
+  <div class="footer-brand"><a href="index.html" class="logo">FINDSKART</a><p>Your one-stop spot for the best deals across fashion, tech, and home — curated daily so you don't have to search.</p></div>
+  <div class="footer-col"><h4>Shop</h4><ul><li><a href="category.html">Fashion</a></li><li><a href="category.html">Tech</a></li><li><a href="category.html">Home & Living</a></li><li><a href="category.html">Footwear</a></li></ul></div>
+  <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About us</a></li><li><a href="about.html">How it works</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+  <div class="footer-col"><h4>Legal</h4><ul><li><a href="disclosure.html">Affiliate disclosure</a></li><li><a href="privacy.html">Privacy policy</a></li><li><a href="terms.html">Terms of use</a></li></ul></div>
+</div><div class="wrap footer-bottom">
+  <p>Affiliate disclosure: Findskart may earn a commission from purchases made through links on this site, at no extra cost to you. This does not influence which products we feature.</p>
+  <span class="footer-copy">&copy; 2026 FINDSKART</span>
+</div></footer>
+<script src="script.js"></script>
+</body></html>

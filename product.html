@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aura Wireless Headphones — Findskart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0D0D0D;--white:#FFFFFF;--paper:#F4F3F1;--line:#E5E3DF;--line-strong:#D6D3CC;--gray:#6B6B68;--gray-dim:#9C9A95;--sale:#C23B22;--good:#3E6B4F;--font-display:'Archivo Black', sans-serif;--font-head:'Archivo', sans-serif;--font-body:'Inter', sans-serif;--max-w:1280px;--edge: clamp(20px, 5vw, 64px);}
+  *{margin:0;padding:0;box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{background:var(--white);color:var(--black);font-family:var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;} img{max-width:100%;display:block;} ul{list-style:none;} button{font-family:inherit;}
+  .wrap{max-width:var(--max-w);margin:0 auto;padding-left:var(--edge);padding-right:var(--edge);}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--black);outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){*{animation-duration:0.001ms !important;transition-duration:0.001ms !important;}}
+  .announce{background:var(--black);color:var(--white);text-align:center;font-size:13px;padding:11px 16px;} .announce a{text-decoration:underline;font-weight:600;}
+  header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  nav{display:flex;align-items:center;justify-content:space-between;padding-top:20px;padding-bottom:20px;gap:24px;}
+  .logo{font-family:var(--font-display);font-size:22px;letter-spacing:-0.01em;}
+  .nav-links{display:flex;align-items:center;gap:32px;font-family:var(--font-head);font-weight:500;font-size:15px;}
+  .nav-links a:hover{opacity:0.55;}
+  .nav-search{flex:1;max-width:340px;display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:100px;padding:11px 18px;font-size:14px;color:var(--gray);}
+  .nav-icons{display:flex;align-items:center;gap:20px;} .icon-btn{width:22px;height:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+  .mobile-toggle{display:none;background:none;border:none;font-size:22px;cursor:pointer;}
+  @media (max-width:980px){.nav-links{display:none;} .nav-search{display:none;} .mobile-toggle{display:block;}}
+  .breadcrumb{padding-top:22px;padding-bottom:8px;font-size:13.5px;color:var(--gray);} .breadcrumb a:hover{color:var(--black);} .breadcrumb span{margin:0 8px;color:var(--gray-dim);}
+  .product{display:grid;grid-template-columns:1fr 1fr;gap:56px;padding-top:28px;padding-bottom:64px;}
+  .gallery{display:flex;gap:16px;}
+  .thumb-col{display:flex;flex-direction:column;gap:12px;flex:0 0 80px;}
+  .thumb{aspect-ratio:1;border-radius:10px;overflow:hidden;border:1.5px solid var(--line);cursor:pointer;opacity:0.7;transition:opacity 0.2s ease, border-color 0.2s ease;}
+  .thumb.active{opacity:1;border-color:var(--black);} .thumb img{width:100%;height:100%;object-fit:cover;}
+  .main-img{flex:1;aspect-ratio:1/1.02;background:var(--paper);border-radius:16px;overflow:hidden;position:relative;}
+  .main-img img{width:100%;height:100%;object-fit:cover;}
+  .main-img .prod-badge{position:absolute;top:18px;left:18px;background:var(--sale);color:var(--white);font-size:12px;font-weight:700;padding:6px 12px;border-radius:7px;}
+  .info-col{display:flex;flex-direction:column;}
+  .brand-tag{font-family:var(--font-head);font-weight:600;font-size:13px;color:var(--gray);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:10px;}
+  .info-col h1{font-family:var(--font-display);font-size:clamp(28px,3.4vw,38px);line-height:1.15;text-transform:uppercase;margin-bottom:14px;}
+  .rating-row{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--gray);margin-bottom:20px;} .rating-row strong{color:var(--black);} .rating-row a{text-decoration:underline;}
+  .price-block{display:flex;align-items:baseline;gap:14px;margin-bottom:8px;}
+  .price-block .now{font-family:var(--font-display);font-size:34px;} .price-block .was{font-size:18px;color:var(--gray-dim);text-decoration:line-through;}
+  .price-block .pct{font-family:var(--font-head);font-weight:700;font-size:13px;background:var(--paper);color:var(--sale);padding:4px 9px;border-radius:6px;}
+  .price-note{font-size:13px;color:var(--gray-dim);margin-bottom:28px;}
+  .desc{font-size:15px;line-height:1.7;color:var(--gray);margin-bottom:28px;max-width:480px;}
+  .variant-group{margin-bottom:24px;} .variant-group h4{font-family:var(--font-head);font-weight:600;font-size:14px;margin-bottom:12px;}
+  .variant-swatches{display:flex;gap:10px;}
+  .v-color{width:32px;height:32px;border-radius:50%;border:1px solid var(--line-strong);cursor:pointer;}
+  .v-color.selected{outline:2px solid var(--black);outline-offset:2px;}
+  .v-size{padding:9px 16px;border:1px solid var(--line-strong);border-radius:8px;font-size:13.5px;font-family:var(--font-head);font-weight:500;cursor:pointer;}
+  .v-size.selected{background:var(--black);color:var(--white);border-color:var(--black);}
+  .buy-box{border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:28px;background:var(--paper);}
+  .stock-status{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--good);margin-bottom:16px;}
+  .stock-status::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--good);}
+  .buy-actions{display:flex;gap:12px;}
+  .btn-buy{flex:1;background:var(--black);color:var(--white);font-family:var(--font-head);font-weight:700;font-size:15.5px;padding:18px 24px;border-radius:100px;text-align:center;border:none;cursor:pointer;transition:transform 0.2s ease, background 0.2s ease;}
+  .btn-buy:hover{transform:translateY(-2px);background:#2A2A28;}
+  .btn-wishlist{width:56px;border:1px solid var(--line-strong);border-radius:100px;background:var(--white);font-size:18px;cursor:pointer;transition:border-color 0.2s ease;}
+  .btn-wishlist:hover{border-color:var(--black);}
+  .buy-note{font-size:12.5px;color:var(--gray-dim);margin-top:14px;text-align:center;line-height:1.5;}
+  .mini-trust{display:flex;gap:24px;flex-wrap:wrap;} .mini-trust div{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--gray);}
+  @media (max-width:900px){.product{grid-template-columns:1fr;gap:32px;} .gallery{flex-direction:column-reverse;} .thumb-col{flex-direction:row;flex:0 0 auto;}}
+  .tabs-section{border-top:1px solid var(--line);padding-top:48px;padding-bottom:64px;}
+  .tab-headers{display:flex;gap:36px;border-bottom:1px solid var(--line);margin-bottom:32px;}
+  .tab-header{font-family:var(--font-head);font-weight:600;font-size:15px;color:var(--gray);padding-bottom:16px;cursor:pointer;border-bottom:2px solid transparent;}
+  .tab-header.active{color:var(--black);border-bottom-color:var(--black);}
+  .specs-table{width:100%;max-width:640px;border-collapse:collapse;}
+  .specs-table tr{border-bottom:1px solid var(--line);} .specs-table td{padding:14px 0;font-size:14.5px;} .specs-table td:first-child{color:var(--gray);width:200px;} .specs-table td:last-child{font-weight:500;}
+  .review-summary{display:flex;gap:48px;margin-bottom:36px;flex-wrap:wrap;}
+  .review-score{text-align:center;} .review-score .big{font-family:var(--font-display);font-size:48px;display:block;}
+  .review-score .stars{color:var(--black);font-size:16px;margin:6px 0;} .review-score .count{font-size:13px;color:var(--gray);}
+  .review-bars{flex:1;min-width:220px;max-width:380px;display:flex;flex-direction:column;gap:8px;justify-content:center;}
+  .review-bar-row{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--gray);}
+  .review-bar-track{flex:1;height:6px;background:var(--line);border-radius:10px;overflow:hidden;}
+  .review-bar-fill{height:100%;background:var(--black);border-radius:10px;}
+  .review-list{display:flex;flex-direction:column;gap:28px;max-width:680px;}
+  .review-item{border-bottom:1px solid var(--line);padding-bottom:24px;}
+  .review-item-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+  .review-item-head .stars{color:var(--black);font-size:14px;} .review-item-head .date{font-size:12.5px;color:var(--gray-dim);}
+  .review-author{font-family:var(--font-head);font-weight:600;font-size:14px;margin-bottom:6px;}
+  .review-text{font-size:14.5px;line-height:1.65;color:var(--gray);}
+  .related{padding-top:0;padding-bottom:80px;} .related h2{font-family:var(--font-display);font-size:clamp(24px,3vw,32px);text-transform:uppercase;margin-bottom:32px;}
+  .prod-grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:22px;}
+  .prod-card{display:flex;flex-direction:column;} .prod-img{position:relative;aspect-ratio:1/1.05;background:var(--paper);border-radius:14px;overflow:hidden;margin-bottom:16px;}
+  .prod-img img{width:100%;height:100%;object-fit:cover;}
+  .prod-rating{font-size:13px;color:var(--gray);display:flex;align-items:center;gap:6px;margin-bottom:6px;} .prod-rating strong{color:var(--black);}
+  .prod-card h3{font-family:var(--font-head);font-weight:600;font-size:15px;margin-bottom:8px;line-height:1.35;}
+  .prod-price{display:flex;align-items:center;gap:10px;font-family:var(--font-head);} .prod-price .now{font-weight:700;font-size:16px;} .prod-price .was{font-size:13.5px;color:var(--gray-dim);text-decoration:line-through;}
+  @media (max-width:900px){.prod-grid{grid-template-columns:repeat(2,1fr);}}
+  footer{background:var(--black);color:var(--white);padding-top:64px;padding-bottom:32px;}
+  .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid #2A2A28;}
+  .footer-brand .logo{color:var(--white);margin-bottom:16px;display:block;} .footer-brand p{color:#9C9A95;font-size:14px;line-height:1.65;max-width:280px;}
+  .footer-col h4{font-family:var(--font-head);font-size:13px;letter-spacing:0.03em;text-transform:uppercase;color:#7C7A75;margin-bottom:16px;}
+  .footer-col ul{display:flex;flex-direction:column;gap:11px;} .footer-col a{font-size:14px;color:#C9C7C2;transition:color 0.2s ease;} .footer-col a:hover{color:var(--white);}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;flex-wrap:wrap;gap:16px;}
+  .footer-bottom p{font-size:12px;color:#7C7A75;line-height:1.6;max-width:680px;} .footer-copy{font-size:12px;color:#7C7A75;}
+  @media (max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px;}} @media (max-width:560px){.footer-top{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="announce">Sign up and get 20% off your first order — <a href="index.html#newsletter">Sign up now</a></div>
+<header><nav class="wrap">
+  <a href="index.html" class="logo">FINDSKART</a>
+  <ul class="nav-links"><li><a href="category.html">Shop &#9662;</a></li><li><a href="category.html">On Sale</a></li><li><a href="category.html">New Arrivals</a></li><li><a href="about.html">About</a></li></ul>
+  <a href="search.html" class="nav-search" style="text-decoration:none;">&#8981; Search for products...</a>
+  <div class="nav-icons"><span class="icon-btn">&#128722;</span><span class="icon-btn">&#128100;</span></div>
+  <button class="mobile-toggle" aria-label="Open menu">&#9776;</button>
+</nav></header>
+<main class="wrap">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><a href="category.html">Tech</a><span>/</span>Aura Wireless Headphones</div>
+  <div class="product">
+    <div class="gallery">
+      <div class="thumb-col">
+        <div class="thumb active"><img src="https://images.pexels.com/photos/2741119/pexels-photo-2741119.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Aura headphones front view"></div>
+        <div class="thumb"><img src="https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Aura headphones side view"></div>
+        <div class="thumb"><img src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Aura headphones case"></div>
+        <div class="thumb"><img src="https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Aura headphones lifestyle shot"></div>
+      </div>
+      <div class="main-img"><span class="prod-badge">-30% OFF</span><img src="https://images.pexels.com/photos/2741119/pexels-photo-2741119.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Aura Wireless Headphones in black"></div>
+    </div>
+    <div class="info-col">
+      <span class="brand-tag">Techloop</span>
+      <h1>Aura Wireless Headphones</h1>
+      <div class="rating-row"><span style="color:var(--black);">&#9733;&#9733;&#9733;&#9733;&#9733;</span><strong>4.8</strong><a href="#reviews">(212 reviews)</a></div>
+      <div class="price-block"><span class="now">$89</span><span class="was">$129</span><span class="pct">Save 31%</span></div>
+      <p class="price-note">Price last checked today &middot; may vary at checkout</p>
+      <p class="desc">Over-ear, active noise cancelling, and 40 hours of battery life that actually holds up to the claim. The pair we keep recommending to friends who say they "just want something that sounds good and doesn't die by lunch."</p>
+      <div class="variant-group"><h4>Color</h4><div class="variant-swatches">
+        <span class="v-color selected" style="background:#0D0D0D;"></span>
+        <span class="v-color" style="background:#F4F3F1;border:1px solid var(--line-strong);"></span>
+        <span class="v-color" style="background:#8A9A8E;"></span>
+        <span class="v-color" style="background:#C9A876;"></span>
+      </div></div>
+      <div class="buy-box">
+        <div class="stock-status">In stock — ships from retailer</div>
+        <div class="buy-actions">
+          <button class="btn-buy">View Deal on Retailer &rarr;</button>
+          <button class="btn-wishlist" aria-label="Add to wishlist">&#9825;</button>
+        </div>
+        <p class="buy-note">You'll be taken to our retail partner to complete your purchase. Findskart may earn a commission at no extra cost to you.</p>
+      </div>
+      <div class="mini-trust"><div>&#10003; Tested by our team</div><div>&#10003; Verified current price</div><div>&#10003; 212 real reviews</div></div>
+    </div>
+  </div>
+  <div class="tabs-section">
+    <div class="tab-headers">
+      <span class="tab-header active">Specifications</span>
+      <span class="tab-header">Reviews (212)</span>
+      <span class="tab-header">Shipping &amp; Returns</span>
+    </div>
+    <table class="specs-table">
+      <tr><td>Battery life</td><td>Up to 40 hours, ANC on</td></tr>
+      <tr><td>Connectivity</td><td>Bluetooth 5.3, multipoint pairing</td></tr>
+      <tr><td>Weight</td><td>254 g</td></tr>
+      <tr><td>Noise cancelling</td><td>Active (adaptive), transparency mode</td></tr>
+      <tr><td>Charging</td><td>USB-C, 10 min fast charge = 5 hrs playback</td></tr>
+      <tr><td>Warranty</td><td>1 year manufacturer warranty</td></tr>
+    </table>
+  </div>
+  <div class="tabs-section" id="reviews" style="border-top:1px solid var(--line);padding-top:0;">
+    <h2 style="font-family:var(--font-display);font-size:clamp(22px,2.6vw,28px);text-transform:uppercase;margin-bottom:32px;">What people are saying</h2>
+    <div class="review-summary">
+      <div class="review-score"><span class="big">4.8</span><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="count">212 reviews</span></div>
+      <div class="review-bars">
+        <div class="review-bar-row"><span>5&#9733;</span><div class="review-bar-track"><div class="review-bar-fill" style="width:82%;"></div></div><span>82%</span></div>
+        <div class="review-bar-row"><span>4&#9733;</span><div class="review-bar-track"><div class="review-bar-fill" style="width:12%;"></div></div><span>12%</span></div>
+        <div class="review-bar-row"><span>3&#9733;</span><div class="review-bar-track"><div class="review-bar-fill" style="width:4%;"></div></div><span>4%</span></div>
+        <div class="review-bar-row"><span>2&#9733;</span><div class="review-bar-track"><div class="review-bar-fill" style="width:1%;"></div></div><span>1%</span></div>
+        <div class="review-bar-row"><span>1&#9733;</span><div class="review-bar-track"><div class="review-bar-fill" style="width:1%;"></div></div><span>1%</span></div>
+      </div>
+    </div>
+    <div class="review-list">
+      <div class="review-item"><div class="review-item-head"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="date">2 weeks ago</span></div><div class="review-author">Maya R. — Verified buyer</div><p class="review-text">Battery life is exactly what they claim, which almost never happens. Used these on a 14-hour flight with ANC on the whole time and still had charge left.</p></div>
+      <div class="review-item"><div class="review-item-head"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="date">1 month ago</span></div><div class="review-author">Devon K. — Verified buyer</div><p class="review-text">Comfortable enough to forget you're wearing them after a few hours. The case feels a bit plasticky but the sound quality makes up for it.</p></div>
+      <div class="review-item"><div class="review-item-head"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="date">1 month ago</span></div><div class="review-author">Priya S. — Verified buyer</div><p class="review-text">Great for the price point. Bass is strong without drowning out vocals. Only wish the carrying case was slightly smaller for travel.</p></div>
+    </div>
+  </div>
+  <div class="related">
+    <h2>You might also like</h2>
+    <div class="prod-grid">
+      <a href="product.html" class="prod-card"><div class="prod-img"><img src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Aura Buds Pro earbuds"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9733; <strong>4.7</strong></div><h3>Aura Buds Pro</h3><div class="prod-price"><span class="now">$74</span></div></a>
+      <a href="product.html" class="prod-card"><div class="prod-img"><img src="https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Echo Mini Smart Speaker"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.6</strong></div><h3>Echo Mini Smart Speaker</h3><div class="prod-price"><span class="now">$59</span></div></a>
+      <a href="product.html" class="prod-card"><div class="prod-img"><img src="https://images.pexels.com/photos/393047/pexels-photo-393047.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Pulse Band SE smartwatch"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9733; <strong>4.9</strong></div><h3>Pulse Band SE</h3><div class="prod-price"><span class="now">$129</span></div></a>
+      <a href="product.html" class="prod-card"><div class="prod-img"><img src="https://images.pexels.com/photos/4071888/pexels-photo-4071888.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Voltbrick power bank"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.4</strong></div><h3>Voltbrick 10K Power Bank</h3><div class="prod-price"><span class="now">$32</span><span class="was">$40</span></div></a>
+    </div>
+  </div>
+</main>
+<footer><div class="wrap footer-top">
+  <div class="footer-brand"><a href="index.html" class="logo">FINDSKART</a><p>Your one-stop spot for the best deals across fashion, tech, and home — curated daily so you don't have to search.</p></div>
+  <div class="footer-col"><h4>Shop</h4><ul><li><a href="category.html">Fashion</a></li><li><a href="category.html">Tech</a></li><li><a href="category.html">Home &amp; Living</a></li><li><a href="category.html">Footwear</a></li></ul></div>
+  <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About us</a></li><li><a href="about.html">How it works</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+  <div class="footer-col"><h4>Legal</h4><ul><li><a href="disclosure.html">Affiliate disclosure</a></li><li><a href="privacy.html">Privacy policy</a></li><li><a href="terms.html">Terms of use</a></li></ul></div>
+</div><div class="wrap footer-bottom">
+  <p>Affiliate disclosure: Findskart may earn a commission from purchases made through links on this site, at no extra cost to you. This does not influence which products we feature.</p>
+  <span class="footer-copy">&copy; 2026 FINDSKART</span>
+</div></footer>
+<script src="script.js"></script>
+</body></html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Affiliate Disclosure — Findskart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0D0D0D;--white:#FFFFFF;--paper:#F4F3F1;--line:#E5E3DF;--gray:#6B6B68;--gray-dim:#9C9A95;--font-display:'Archivo Black', sans-serif;--font-head:'Archivo', sans-serif;--font-body:'Inter', sans-serif;--max-w:1280px;--edge: clamp(20px, 5vw, 64px);}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--white);color:var(--black);font-family:var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{color:inherit;} ul{list-style:none;}
+  .wrap{max-width:var(--max-w);margin:0 auto;padding-left:var(--edge);padding-right:var(--edge);}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--black);outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){*{animation-duration:0.001ms !important;transition-duration:0.001ms !important;}}
+  .announce{background:var(--black);color:var(--white);text-align:center;font-size:13px;padding:11px 16px;}
+  .announce a{text-decoration:underline;font-weight:600;}
+  header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  nav{display:flex;align-items:center;justify-content:space-between;padding-top:20px;padding-bottom:20px;gap:24px;}
+  .logo{font-family:var(--font-display);font-size:22px;letter-spacing:-0.01em;text-decoration:none;}
+  .nav-links{display:flex;align-items:center;gap:32px;font-family:var(--font-head);font-weight:500;font-size:15px;}
+  .nav-links a{text-decoration:none;} .nav-links a:hover{opacity:0.55;}
+  .nav-search{flex:1;max-width:340px;display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:100px;padding:11px 18px;font-size:14px;color:var(--gray);}
+  .nav-icons{display:flex;align-items:center;gap:20px;}
+  .icon-btn{width:22px;height:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+  .mobile-toggle{display:none;background:none;border:none;font-size:22px;cursor:pointer;}
+  @media (max-width:980px){.nav-links{display:none;}.nav-search{display:none;}.mobile-toggle{display:block;}}
+  .legal{display:grid;grid-template-columns:240px 1fr;gap:56px;padding-top:56px;padding-bottom:88px;}
+  .legal-nav{position:sticky;top:96px;align-self:start;}
+  .legal-nav .eyebrow{font-family:var(--font-head);font-weight:600;font-size:12.5px;color:var(--gray-dim);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:16px;}
+  .legal-nav a{display:block;font-size:14.5px;color:var(--gray);text-decoration:none;padding:9px 0;border-bottom:1px solid var(--line);}
+  .legal-nav a.active{color:var(--black);font-weight:600;} .legal-nav a:last-child{border-bottom:none;}
+  .legal-body h1{font-family:var(--font-display);font-size:clamp(28px,3.4vw,40px);text-transform:uppercase;margin-bottom:10px;line-height:1.1;}
+  .legal-body .updated{font-size:13.5px;color:var(--gray-dim);margin-bottom:36px;}
+  .legal-body .intro-box{background:var(--paper);border-radius:14px;padding:24px 28px;margin-bottom:40px;font-size:15px;line-height:1.7;color:var(--black);}
+  .legal-body h2{font-family:var(--font-head);font-weight:700;font-size:19px;margin-top:36px;margin-bottom:14px;}
+  .legal-body p{font-size:15px;line-height:1.75;color:var(--gray);margin-bottom:16px;max-width:640px;}
+  .legal-body ul.bullets{margin-bottom:16px;max-width:640px;}
+  .legal-body ul.bullets li{font-size:15px;line-height:1.7;color:var(--gray);padding-left:20px;position:relative;margin-bottom:10px;}
+  .legal-body ul.bullets li::before{content:'\2014';position:absolute;left:0;color:var(--gray-dim);}
+  .legal-body a.inline-link{color:var(--black);text-decoration:underline;}
+  @media (max-width:900px){.legal{grid-template-columns:1fr;gap:32px;}.legal-nav{position:static;display:flex;gap:8px;overflow-x:auto;}.legal-nav .eyebrow{display:none;}.legal-nav a{border-bottom:none;border:1px solid var(--line);border-radius:100px;padding:9px 16px;white-space:nowrap;}}
+  footer{background:var(--black);color:var(--white);padding-top:64px;padding-bottom:32px;}
+  .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid #2A2A28;}
+  .footer-brand .logo{color:var(--white);margin-bottom:16px;display:block;text-decoration:none;}
+  .footer-brand p{color:#9C9A95;font-size:14px;line-height:1.65;max-width:280px;}
+  .footer-col h4{font-family:var(--font-head);font-size:13px;letter-spacing:0.03em;text-transform:uppercase;color:#7C7A75;margin-bottom:16px;}
+  .footer-col ul{display:flex;flex-direction:column;gap:11px;}
+  .footer-col a{font-size:14px;color:#C9C7C2;transition:color 0.2s ease;text-decoration:none;}
+  .footer-col a:hover{color:var(--white);}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;flex-wrap:wrap;gap:16px;}
+  .footer-bottom p{font-size:12px;color:#7C7A75;line-height:1.6;max-width:680px;}
+  .footer-copy{font-size:12px;color:#7C7A75;}
+  @media (max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px;}}
+  @media (max-width:560px){.footer-top{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="announce">Sign up and get 20% off your first order — <a href="index.html#newsletter">Sign up now</a></div>
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="logo">FINDSKART</a>
+    <ul class="nav-links">
+      <li><a href="category.html">Shop</a></li>
+      <li><a href="category.html">On Sale</a></li>
+      <li><a href="category.html">New Arrivals</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <a href="search.html" class="nav-search" style="text-decoration:none;">Search for products...</a>
+    <div class="nav-icons">
+      <span class="icon-btn">&#128722;</span>
+      <span class="icon-btn">&#128100;</span>
+    </div>
+    <button class="mobile-toggle" aria-label="Open menu">&#9776;</button>
+  </nav>
+</header>
+<main class="wrap">
+  <div class="legal">
+    <aside class="legal-nav">
+      <div class="eyebrow">Legal</div>
+      <a href="disclosure.html" class="active">Affiliate Disclosure</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Use</a>
+    </aside>
+    <div class="legal-body">
+      <h1>Affiliate Disclosure</h1>
+      <p class="updated">Last updated: June 2026</p>
+      <div class="intro-box">In short: when you click a product link on Findskart and make a purchase, we may earn a commission from the retailer. It costs you nothing extra, and it never decides what we recommend.</div>
+      <h2>What this means</h2>
+      <p>Findskart participates in affiliate marketing programs. This means that some of the links to products on our site are "affiliate links." If you click one of these links and make a purchase, we may receive a small commission from the retailer or brand at no additional cost to you.</p>
+      <h2>Why we use affiliate links</h2>
+      <p>Running Findskart — testing products, maintaining the site, and paying our small team — costs money. Affiliate commissions are how we keep the site free to use without charging for access or relying on intrusive advertising.</p>
+      <h2>This does not affect our recommendations</h2>
+      <ul class="bullets">
+        <li>Products are selected based on our own testing and research, not on commission rates.</li>
+        <li>A brand paying for a placement does not guarantee a spot on Findskart — we don't accept payment for editorial inclusion.</li>
+        <li>If a product we've recommended stops being good, we remove or update the listing regardless of any affiliate relationship.</li>
+      </ul>
+      <h2>Price accuracy</h2>
+      <p>Prices shown on Findskart are checked regularly but may change at the retailer's discretion. Always confirm the final price at checkout on the retailer's site before completing your purchase.</p>
+      <h2>Questions</h2>
+      <p>If you have any questions about our affiliate relationships or how we select products, reach out at <a href="mailto:hello@findskart.com" class="inline-link">hello@findskart.com</a> or visit our <a href="contact.html" class="inline-link">contact page</a>.</p>
+    </div>
+  </div>
+</main>
+<footer>
+  <div class="wrap footer-top">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">FINDSKART</a>
+      <p>Your one-stop spot for the best deals across fashion, tech, and home — curated daily so you don't have to search.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="category.html">Fashion</a></li>
+        <li><a href="category.html">Tech</a></li>
+        <li><a href="category.html">Home & Living</a></li>
+        <li><a href="category.html">Footwear</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About us</a></li>
+        <li><a href="about.html">How it works</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="disclosure.html">Affiliate disclosure</a></li>
+        <li><a href="privacy.html">Privacy policy</a></li>
+        <li><a href="terms.html">Terms of use</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <p>Affiliate disclosure: Findskart may earn a commission from purchases made through links on this site, at no extra cost to you. This does not influence which products we feature.</p>
+    <span class="footer-copy">&copy; 2026 FINDSKART</span>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

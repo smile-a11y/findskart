@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech — Findskart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0D0D0D;--white:#FFFFFF;--paper:#F4F3F1;--line:#E5E3DF;--line-strong:#D6D3CC;--gray:#6B6B68;--gray-dim:#9C9A95;--sale:#C23B22;--font-display:'Archivo Black', sans-serif;--font-head:'Archivo', sans-serif;--font-body:'Inter', sans-serif;--max-w:1280px;--edge: clamp(20px, 5vw, 64px);}
+  *{margin:0;padding:0;box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{background:var(--white);color:var(--black);font-family:var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;} img{max-width:100%;display:block;} ul{list-style:none;} button{font-family:inherit;}
+  .wrap{max-width:var(--max-w);margin:0 auto;padding-left:var(--edge);padding-right:var(--edge);}
+  a:focus-visible, button:focus-visible, input:focus-visible{outline:2px solid var(--black);outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){*{animation-duration:0.001ms !important;transition-duration:0.001ms !important;}}
+  .announce{background:var(--black);color:var(--white);text-align:center;font-size:13px;padding:11px 16px;} .announce a{text-decoration:underline;font-weight:600;}
+  header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  nav{display:flex;align-items:center;justify-content:space-between;padding-top:20px;padding-bottom:20px;gap:24px;}
+  .logo{font-family:var(--font-display);font-size:22px;letter-spacing:-0.01em;}
+  .nav-links{display:flex;align-items:center;gap:32px;font-family:var(--font-head);font-weight:500;font-size:15px;}
+  .nav-links a{transition:opacity 0.2s ease;} .nav-links a:hover{opacity:0.55;} .nav-links a.active{border-bottom:2px solid var(--black);padding-bottom:4px;}
+  .nav-search{flex:1;max-width:340px;display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:100px;padding:11px 18px;font-size:14px;color:var(--gray);}
+  .nav-icons{display:flex;align-items:center;gap:20px;} .icon-btn{width:22px;height:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+  .mobile-toggle{display:none;background:none;border:none;font-size:22px;cursor:pointer;}
+  @media (max-width:980px){.nav-links{display:none;} .nav-search{display:none;} .mobile-toggle{display:block;}}
+  .breadcrumb{padding-top:22px;padding-bottom:8px;font-size:13.5px;color:var(--gray);} .breadcrumb a:hover{color:var(--black);} .breadcrumb span{margin:0 8px;color:var(--gray-dim);}
+  .page-head{padding-top:18px;padding-bottom:32px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;}
+  .page-head h1{font-family:var(--font-display);font-size:clamp(30px,4vw,44px);text-transform:uppercase;letter-spacing:-0.01em;}
+  .page-head p{color:var(--gray);font-size:14.5px;margin-top:8px;}
+  .result-count{font-size:14px;color:var(--gray);font-family:var(--font-head);}
+  .listing{display:grid;grid-template-columns:240px 1fr;gap:40px;padding-top:36px;padding-bottom:80px;}
+  .filters h3.filters-title{font-family:var(--font-head);font-weight:700;font-size:16px;margin-bottom:24px;}
+  .filter-group{border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:22px;}
+  .filter-group h4{font-family:var(--font-head);font-weight:600;font-size:14px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;}
+  .filter-option{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--gray);margin-bottom:11px;cursor:pointer;}
+  .filter-option input{width:16px;height:16px;accent-color:var(--black);cursor:pointer;}
+  .filter-option:hover{color:var(--black);}
+  .price-range{display:flex;align-items:center;gap:10px;margin-top:6px;}
+  .price-range input[type="text"]{width:100%;border:1px solid var(--line-strong);border-radius:8px;padding:9px 10px;font-size:13px;font-family:var(--font-body);}
+  .color-swatches{display:flex;gap:10px;flex-wrap:wrap;}
+  .swatch{width:26px;height:26px;border-radius:50%;border:1px solid var(--line-strong);cursor:pointer;}
+  .swatch.selected{outline:2px solid var(--black);outline-offset:2px;}
+  .clear-filters{font-size:13.5px;font-weight:600;text-decoration:underline;color:var(--gray);} .clear-filters:hover{color:var(--black);}
+  .toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;gap:16px;flex-wrap:wrap;}
+  .sort-select{display:flex;align-items:center;gap:8px;font-size:14px;border:1px solid var(--line-strong);border-radius:100px;padding:9px 16px;cursor:pointer;font-family:var(--font-head);font-weight:500;}
+  .prod-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:24px;}
+  .prod-card{display:flex;flex-direction:column;}
+  .prod-img{position:relative;aspect-ratio:1/1.05;background:var(--paper);border-radius:14px;overflow:hidden;margin-bottom:16px;}
+  .prod-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.35s ease;}
+  .prod-card:hover .prod-img img{transform:scale(1.05);}
+  .prod-badge{position:absolute;top:12px;left:12px;background:var(--sale);color:var(--white);font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;} .prod-badge.new{background:var(--black);}
+  .wishlist-btn{position:absolute;top:12px;right:12px;width:34px;height:34px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;}
+  .prod-rating{font-size:13px;color:var(--gray);display:flex;align-items:center;gap:6px;margin-bottom:6px;} .prod-rating strong{color:var(--black);}
+  .prod-card h3{font-family:var(--font-head);font-weight:600;font-size:15.5px;margin-bottom:8px;line-height:1.35;}
+  .prod-price{display:flex;align-items:center;gap:10px;font-family:var(--font-head);} .prod-price .now{font-weight:700;font-size:16px;} .prod-price .was{font-size:14px;color:var(--gray-dim);text-decoration:line-through;}
+  .pagination{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:56px;}
+  .page-btn{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:14px;font-family:var(--font-head);font-weight:600;color:var(--gray);cursor:pointer;}
+  .page-btn.active{background:var(--black);color:var(--white);} .page-btn:hover:not(.active){background:var(--paper);}
+  @media (max-width:900px){.listing{grid-template-columns:1fr;} .filters{display:none;} .prod-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.prod-grid{grid-template-columns:1fr 1fr;gap:14px;}}
+  footer{background:var(--black);color:var(--white);padding-top:64px;padding-bottom:32px;}
+  .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid #2A2A28;}
+  .footer-brand .logo{color:var(--white);margin-bottom:16px;display:block;} .footer-brand p{color:#9C9A95;font-size:14px;line-height:1.65;max-width:280px;}
+  .footer-col h4{font-family:var(--font-head);font-size:13px;letter-spacing:0.03em;text-transform:uppercase;color:#7C7A75;margin-bottom:16px;}
+  .footer-col ul{display:flex;flex-direction:column;gap:11px;} .footer-col a{font-size:14px;color:#C9C7C2;transition:color 0.2s ease;} .footer-col a:hover{color:var(--white);}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;flex-wrap:wrap;gap:16px;}
+  .footer-bottom p{font-size:12px;color:#7C7A75;line-height:1.6;max-width:680px;} .footer-copy{font-size:12px;color:#7C7A75;}
+  @media (max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px;}} @media (max-width:560px){.footer-top{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="announce">Sign up and get 20% off your first order — <a href="index.html#newsletter">Sign up now</a></div>
+<header><nav class="wrap">
+  <a href="index.html" class="logo">FINDSKART</a>
+  <ul class="nav-links"><li><a href="category.html" class="active">Shop &#9662;</a></li><li><a href="category.html">On Sale</a></li><li><a href="category.html">New Arrivals</a></li><li><a href="about.html">About</a></li></ul>
+  <a href="search.html" class="nav-search" style="text-decoration:none;">&#8981; Search for products...</a>
+  <div class="nav-icons"><span class="icon-btn">&#128722;</span><span class="icon-btn">&#128100;</span></div>
+  <button class="mobile-toggle" aria-label="Open menu">&#9776;</button>
+</nav></header>
+<main class="wrap">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><a href="category.html">Shop</a><span>/</span>Tech</div>
+  <div class="page-head"><div><h1>Tech</h1><p>Headphones, speakers, wearables, and the gear actually worth the upgrade.</p></div><span class="result-count">128 products</span></div>
+  <div class="listing">
+    <aside class="filters">
+      <h3 class="filters-title">Filters</h3>
+      <div class="filter-group"><h4>Category <a href="#" class="clear-filters">Clear</a></h4>
+        <label class="filter-option"><input type="checkbox" checked> Headphones</label>
+        <label class="filter-option"><input type="checkbox"> Smart Home</label>
+        <label class="filter-option"><input type="checkbox"> Wearables</label>
+        <label class="filter-option"><input type="checkbox"> Desk Setup</label>
+        <label class="filter-option"><input type="checkbox"> Chargers &amp; Cables</label>
+      </div>
+      <div class="filter-group"><h4>Price</h4><div class="price-range"><input type="text" placeholder="Min"><span style="color:var(--gray-dim);">&mdash;</span><input type="text" placeholder="Max"></div></div>
+      <div class="filter-group"><h4>Brand</h4>
+        <label class="filter-option"><input type="checkbox"> Techloop</label>
+        <label class="filter-option"><input type="checkbox"> Aura</label>
+        <label class="filter-option"><input type="checkbox"> Pulse</label>
+        <label class="filter-option"><input type="checkbox"> Lumen</label>
+      </div>
+      <div class="filter-group"><h4>Color</h4><div class="color-swatches">
+        <span class="swatch selected" style="background:#0D0D0D;"></span>
+        <span class="swatch" style="background:#FFFFFF;"></span>
+        <span class="swatch" style="background:#C23B22;"></span>
+        <span class="swatch" style="background:#8A9A8E;"></span>
+        <span class="swatch" style="background:#C9A876;"></span>
+      </div></div>
+      <div class="filter-group" style="border-bottom:none;"><h4>Rating</h4>
+        <label class="filter-option"><input type="checkbox"> &#9733;&#9733;&#9733;&#9733;&#9733; &amp; up</label>
+        <label class="filter-option"><input type="checkbox"> &#9733;&#9733;&#9733;&#9733;&#9734; &amp; up</label>
+        <label class="filter-option"><input type="checkbox"> &#9733;&#9733;&#9733;&#9734;&#9734; &amp; up</label>
+      </div>
+    </aside>
+    <div>
+      <div class="toolbar"><span class="result-count">Showing 1&ndash;9 of 128</span><span class="sort-select">Sort by: Most Popular &#9662;</span></div>
+      <div class="prod-grid">
+        <a href="product.html" class="prod-card"><div class="prod-img"><span class="prod-badge">-30%</span><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/2741119/pexels-photo-2741119.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Aura wireless headphones"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9733; <strong>4.8</strong> (212)</div><h3>Aura Wireless Headphones</h3><div class="prod-price"><span class="now">$89</span><span class="was">$129</span></div></a>
+        <a href="product.html" class="prod-card"><div class="prod-img"><span class="prod-badge new">New</span><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Smart home speaker"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.6</strong> (98)</div><h3>Echo Mini Smart Speaker</h3><div class="prod-price"><span class="now">$59</span></div></a>
+        <a href="product.html" class="prod-card"><div class="prod-img"><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/393047/pexels-photo-393047.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Smartwatch on wrist"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9733; <strong>4.9</strong> (340)</div><h3>Pulse Band SE</h3><div class="prod-price"><span class="now">$129</span></div></a>
+        <a href="product.html" class="prod-card"><div class="prod-img"><span class="prod-badge">-15%</span><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/3756879/pexels-photo-3756879.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Desk lamp"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.5</strong> (76)</div><h3>Lumen Pro Monitor Light</h3><div class="prod-price"><span class="now">$49</span><span class="was">$59</span></div></a>
+        <a href="product.html" class="prod-card"><div class="prod-img"><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/1591060/pexels-photo-1591060.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Wireless charger"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.3</strong> (54)</div><h3>Snap Wireless Charger</h3><div class="prod-price"><span class="now">$28</span></div></a>
+        <a href="product.html" class="prod-card"><div class="prod-img"><span class="prod-badge new">New</span><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Bluetooth earbuds"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9733; <strong>4.7</strong> (188)</div><h3>Aura Buds Pro</h3><div class="prod-price"><span class="now">$74</span></div></a>
+        <a href="product.html" class="prod-card"><div class="prod-img"><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Mechanical keyboard"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.6</strong> (122)</div><h3>Keystroke Mini Keyboard</h3><div class="prod-price"><span class="now">$95</span></div></a>
+        <a href="product.html" class="prod-card"><div class="prod-img"><span class="prod-badge">-20%</span><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/4071888/pexels-photo-4071888.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Portable power bank"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.4</strong> (67)</div><h3>Voltbrick 10K Power Bank</h3><div class="prod-price"><span class="now">$32</span><span class="was">$40</span></div></a>
+        <a href="product.html" class="prod-card"><div class="prod-img"><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/4790268/pexels-photo-4790268.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Smart home hub"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.5</strong> (91)</div><h3>Nexus Smart Hub</h3><div class="prod-price"><span class="now">$64</span></div></a>
+      </div>
+      <div class="pagination">
+        <span class="page-btn">&larr;</span>
+        <span class="page-btn active">1</span>
+        <span class="page-btn">2</span>
+        <span class="page-btn">3</span>
+        <span class="page-btn">&hellip;</span>
+        <span class="page-btn">14</span>
+        <span class="page-btn">&rarr;</span>
+      </div>
+    </div>
+  </div>
+</main>
+<footer><div class="wrap footer-top">
+  <div class="footer-brand"><a href="index.html" class="logo">FINDSKART</a><p>Your one-stop spot for the best deals across fashion, tech, and home — curated daily so you don't have to search.</p></div>
+  <div class="footer-col"><h4>Shop</h4><ul><li><a href="category.html">Fashion</a></li><li><a href="category.html">Tech</a></li><li><a href="category.html">Home &amp; Living</a></li><li><a href="category.html">Footwear</a></li></ul></div>
+  <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About us</a></li><li><a href="about.html">How it works</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+  <div class="footer-col"><h4>Legal</h4><ul><li><a href="disclosure.html">Affiliate disclosure</a></li><li><a href="privacy.html">Privacy policy</a></li><li><a href="terms.html">Terms of use</a></li></ul></div>
+</div><div class="wrap footer-bottom">
+  <p>Affiliate disclosure: Findskart may earn a commission from purchases made through links on this site, at no extra cost to you. This does not influence which products we feature.</p>
+  <span class="footer-copy">&copy; 2026 FINDSKART</span>
+</div></footer>
+<script src="script.js"></script>
+</body></html>
