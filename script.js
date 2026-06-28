@@ -1,23 +1,23 @@
 // === PRODUCT CATALOG ===
 var products = [
-  { name: "Aura Wireless Headphones", img: "https://images.pexels.com/photos/2741119/pexels-photo-2741119.jpeg?auto=compress&cs=tinysrgb&w=500", price: 89, was: 129, rating: 4.8, reviews: 212, badge: "-30%", badgeClass: "", tags: ["headphones","over-ear","wireless","noise cancelling","bluetooth","tech","audio"] },
-  { name: "Aura Buds Pro", img: "https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=500", price: 74, was: null, rating: 4.7, reviews: 188, badge: "New", badgeClass: "new", tags: ["earbuds","wireless","bluetooth","in-ear","tech","audio"] },
-  { name: "Studio One Over-Ear", img: "https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=500", price: 112, was: null, rating: 4.5, reviews: 64, badge: null, badgeClass: "", tags: ["headphones","over-ear","wired","studio","tech","audio"] },
-  { name: "Lumen Lite Headphones", img: "https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=500", price: 45, was: 53, rating: 4.3, reviews: 41, badge: "-15%", badgeClass: "", tags: ["headphones","wireless","compact","lightweight","tech","audio"] },
-  { name: "Pulse Sport Buds", img: "https://images.pexels.com/photos/393047/pexels-photo-393047.jpeg?auto=compress&cs=tinysrgb&w=500", price: 58, was: null, rating: 4.4, reviews: 97, badge: null, badgeClass: "", tags: ["earbuds","wireless","sport","running","fitness","tech","audio"] },
-  { name: "Voyager Travel Headphones", img: "https://images.pexels.com/photos/4071888/pexels-photo-4071888.jpeg?auto=compress&cs=tinysrgb&w=500", price: 96, was: null, rating: 4.6, reviews: 53, badge: "New", badgeClass: "new", tags: ["headphones","wireless","travel","foldable","noise cancelling","tech","audio"] },
-  { name: "Apex Gaming Headset", img: "https://images.pexels.com/photos/3756879/pexels-photo-3756879.jpeg?auto=compress&cs=tinysrgb&w=500", price: 67, was: null, rating: 4.5, reviews: 130, badge: null, badgeClass: "", tags: ["headset","gaming","wired","microphone","tech","audio"] },
-  { name: "Essential Wireless Headphones", img: "https://images.pexels.com/photos/1591060/pexels-photo-1591060.jpeg?auto=compress&cs=tinysrgb&w=500", price: 28, was: 35, rating: 4.2, reviews: 29, badge: "-20%", badgeClass: "", tags: ["headphones","wireless","budget","cheap","affordable","tech","audio"] },
-  { name: "Echo Mini Smart Speaker", img: "https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=500", price: 59, was: null, rating: 4.6, reviews: 98, badge: "New", badgeClass: "new", tags: ["speaker","smart","voice assistant","bluetooth","home","tech"] },
-  { name: "Pulse Band SE", img: "https://images.pexels.com/photos/393047/pexels-photo-393047.jpeg?auto=compress&cs=tinysrgb&w=500", price: 129, was: null, rating: 4.9, reviews: 340, badge: null, badgeClass: "", tags: ["smartwatch","wearable","fitness","tracker","tech"] },
-  { name: "Lumen Pro Monitor Light", img: "https://images.pexels.com/photos/3756879/pexels-photo-3756879.jpeg?auto=compress&cs=tinysrgb&w=500", price: 49, was: 59, rating: 4.5, reviews: 76, badge: "-15%", badgeClass: "", tags: ["desk lamp","monitor light","led","workspace","home","tech"] },
-  { name: "Snap Wireless Charger", img: "https://images.pexels.com/photos/1591060/pexels-photo-1591060.jpeg?auto=compress&cs=tinysrgb&w=500", price: 28, was: null, rating: 4.3, reviews: 54, badge: null, badgeClass: "", tags: ["charger","wireless","charging pad","qi","tech"] },
-  { name: "Keystroke Mini Keyboard", img: "https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=500", price: 95, was: null, rating: 4.6, reviews: 122, badge: null, badgeClass: "", tags: ["keyboard","mechanical","mini","compact","desk","tech"] },
-  { name: "Voltbrick 10K Power Bank", img: "https://images.pexels.com/photos/4071888/pexels-photo-4071888.jpeg?auto=compress&cs=tinysrgb&w=500", price: 32, was: 40, rating: 4.4, reviews: 67, badge: "-20%", badgeClass: "", tags: ["power bank","charger","battery","portable","travel","tech"] },
-  { name: "Nexus Smart Hub", img: "https://images.pexels.com/photos/4790268/pexels-photo-4790268.jpeg?auto=compress&cs=tinysrgb&w=500", price: 64, was: null, rating: 4.5, reviews: 91, badge: null, badgeClass: "", tags: ["smart home","hub","automation","iot","tech"] },
-  { name: "Oversized Graphic Tee", img: "https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=500", price: 32, was: null, rating: 4.6, reviews: 45, badge: "New", badgeClass: "new", tags: ["t-shirt","shirt","fashion","clothing","graphic","streetwear"] },
-  { name: "Cloudstep Running Shoes", img: "https://images.pexels.com/photos/19090/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=500", price: 74, was: null, rating: 4.5, reviews: 120, badge: "New", badgeClass: "new", tags: ["shoes","sneakers","running","footwear","sports","fitness"] },
-  { name: "Hearth Ceramic Mug Set", img: "https://images.pexels.com/photos/1080696/pexels-photo-1080696.jpeg?auto=compress&cs=tinysrgb&w=500", price: 24, was: 30, rating: 4.4, reviews: 38, badge: "-20%", badgeClass: "", tags: ["mug","ceramic","kitchen","home","drinkware"] }
+  { id: 1, name: "Aura Wireless Headphones", img: "https://images.pexels.com/photos/2741119/pexels-photo-2741119.jpeg?auto=compress&cs=tinysrgb&w=500", price: 89, was: 129, rating: 4.8, reviews: 212, badge: "-30%", badgeClass: "", tags: ["headphones","over-ear","wireless","noise cancelling","bluetooth","tech","audio"] },
+  { id: 2, name: "Aura Buds Pro", img: "https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=500", price: 74, was: null, rating: 4.7, reviews: 188, badge: "New", badgeClass: "new", tags: ["earbuds","wireless","bluetooth","in-ear","tech","audio"] },
+  { id: 3, name: "Studio One Over-Ear", img: "https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=500", price: 112, was: null, rating: 4.5, reviews: 64, badge: null, badgeClass: "", tags: ["headphones","over-ear","wired","studio","tech","audio"] },
+  { id: 4, name: "Lumen Lite Headphones", img: "https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=500", price: 45, was: 53, rating: 4.3, reviews: 41, badge: "-15%", badgeClass: "", tags: ["headphones","wireless","compact","lightweight","tech","audio"] },
+  { id: 5, name: "Pulse Sport Buds", img: "https://images.pexels.com/photos/393047/pexels-photo-393047.jpeg?auto=compress&cs=tinysrgb&w=500", price: 58, was: null, rating: 4.4, reviews: 97, badge: null, badgeClass: "", tags: ["earbuds","wireless","sport","running","fitness","tech","audio"] },
+  { id: 6, name: "Voyager Travel Headphones", img: "https://images.pexels.com/photos/4071888/pexels-photo-4071888.jpeg?auto=compress&cs=tinysrgb&w=500", price: 96, was: null, rating: 4.6, reviews: 53, badge: "New", badgeClass: "new", tags: ["headphones","wireless","travel","foldable","noise cancelling","tech","audio"] },
+  { id: 7, name: "Apex Gaming Headset", img: "https://images.pexels.com/photos/3756879/pexels-photo-3756879.jpeg?auto=compress&cs=tinysrgb&w=500", price: 67, was: null, rating: 4.5, reviews: 130, badge: null, badgeClass: "", tags: ["headset","gaming","wired","microphone","tech","audio"] },
+  { id: 8, name: "Essential Wireless Headphones", img: "https://images.pexels.com/photos/1591060/pexels-photo-1591060.jpeg?auto=compress&cs=tinysrgb&w=500", price: 28, was: 35, rating: 4.2, reviews: 29, badge: "-20%", badgeClass: "", tags: ["headphones","wireless","budget","cheap","affordable","tech","audio"] },
+  { id: 9, name: "Echo Mini Smart Speaker", img: "https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=500", price: 59, was: null, rating: 4.6, reviews: 98, badge: "New", badgeClass: "new", tags: ["speaker","smart","voice assistant","bluetooth","home","tech"] },
+  { id: 10, name: "Pulse Band SE", img: "https://images.pexels.com/photos/393047/pexels-photo-393047.jpeg?auto=compress&cs=tinysrgb&w=500", price: 129, was: null, rating: 4.9, reviews: 340, badge: null, badgeClass: "", tags: ["smartwatch","wearable","fitness","tracker","tech"] },
+  { id: 11, name: "Lumen Pro Monitor Light", img: "https://images.pexels.com/photos/3756879/pexels-photo-3756879.jpeg?auto=compress&cs=tinysrgb&w=500", price: 49, was: 59, rating: 4.5, reviews: 76, badge: "-15%", badgeClass: "", tags: ["desk lamp","monitor light","led","workspace","home","tech"] },
+  { id: 12, name: "Snap Wireless Charger", img: "https://images.pexels.com/photos/1591060/pexels-photo-1591060.jpeg?auto=compress&cs=tinysrgb&w=500", price: 28, was: null, rating: 4.3, reviews: 54, badge: null, badgeClass: "", tags: ["charger","wireless","charging pad","qi","tech"] },
+  { id: 13, name: "Keystroke Mini Keyboard", img: "https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=500", price: 95, was: null, rating: 4.6, reviews: 122, badge: null, badgeClass: "", tags: ["keyboard","mechanical","mini","compact","desk","tech"] },
+  { id: 14, name: "Voltbrick 10K Power Bank", img: "https://images.pexels.com/photos/4071888/pexels-photo-4071888.jpeg?auto=compress&cs=tinysrgb&w=500", price: 32, was: 40, rating: 4.4, reviews: 67, badge: "-20%", badgeClass: "", tags: ["power bank","charger","battery","portable","travel","tech"] },
+  { id: 15, name: "Nexus Smart Hub", img: "https://images.pexels.com/photos/4790268/pexels-photo-4790268.jpeg?auto=compress&cs=tinysrgb&w=500", price: 64, was: null, rating: 4.5, reviews: 91, badge: null, badgeClass: "", tags: ["smart home","hub","automation","iot","tech"] },
+  { id: 16, name: "Oversized Graphic Tee", img: "https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=500", price: 32, was: null, rating: 4.6, reviews: 45, badge: "New", badgeClass: "new", tags: ["t-shirt","shirt","fashion","clothing","graphic","streetwear"] },
+  { id: 17, name: "Cloudstep Running Shoes", img: "https://images.pexels.com/photos/19090/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=500", price: 74, was: null, rating: 4.5, reviews: 120, badge: "New", badgeClass: "new", tags: ["shoes","sneakers","running","footwear","sports","fitness"] },
+  { id: 18, name: "Hearth Ceramic Mug Set", img: "https://images.pexels.com/photos/1080696/pexels-photo-1080696.jpeg?auto=compress&cs=tinysrgb&w=500", price: 24, was: 30, rating: 4.4, reviews: 38, badge: "-20%", badgeClass: "", tags: ["mug","ceramic","kitchen","home","drinkware"] }
 ];
 
 // === FUZZY SEARCH ===
@@ -131,6 +131,8 @@ function renderProductCard(p) {
 
 // === SEARCH PAGE INIT ===
 function initSearchPage() {
+  var searchHead = document.querySelector('.search-head');
+  if (!searchHead) return;
   var params = new URLSearchParams(window.location.search);
   var query = params.get("q") || "";
   var searchInput = document.querySelector(".nav-search input");
@@ -195,6 +197,171 @@ function initNavSearch() {
       });
     }
   });
+}
+
+// === CATEGORY PAGE INFINITE SCROLL ===
+var categoryState = {
+  allProducts: [],
+  displayedIds: {},
+  page: 0,
+  perPage: 9,
+  isLoading: false,
+  allLoaded: false,
+  totalProducts: 0
+};
+
+function initCategoryPage() {
+  var grid = document.querySelector('.prod-grid');
+  var sentinel = document.getElementById('scroll-sentinel');
+  if (!grid || !sentinel) return;
+
+  grid.innerHTML = '';
+  categoryState.allProducts = products.slice();
+  categoryState.totalProducts = categoryState.allProducts.length;
+  categoryState.displayedIds = {};
+  categoryState.page = 0;
+  categoryState.allLoaded = false;
+  categoryState.isLoading = false;
+
+  var pageHeadCount = document.querySelector('.page-head .result-count');
+  if (pageHeadCount) pageHeadCount.textContent = categoryState.totalProducts + ' products';
+
+  loadMoreProducts();
+
+  var observer = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting && !categoryState.isLoading && !categoryState.allLoaded) {
+      loadMoreProducts();
+    }
+  }, { rootMargin: '400px' });
+
+  observer.observe(sentinel);
+}
+
+function loadMoreProducts() {
+  if (categoryState.isLoading || categoryState.allLoaded) return;
+
+  categoryState.isLoading = true;
+  var loader = document.getElementById('scroll-loader');
+  if (loader) loader.style.display = 'flex';
+
+  var sentinel = document.getElementById('scroll-sentinel');
+  if (sentinel) sentinel.style.display = 'none';
+
+  setTimeout(function() {
+    var start = categoryState.page * categoryState.perPage;
+    var end = start + categoryState.perPage;
+    var newProducts = categoryState.allProducts.slice(start, end);
+
+    var grid = document.querySelector('.prod-grid');
+
+    newProducts.forEach(function(p) {
+      if (!categoryState.displayedIds[p.id]) {
+        categoryState.displayedIds[p.id] = true;
+        var temp = document.createElement('div');
+        temp.innerHTML = renderProductCard(p);
+        var card = temp.firstElementChild;
+        grid.appendChild(card);
+
+        var wishBtn = card.querySelector('.wishlist-btn');
+        if (wishBtn) {
+          wishBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (this.textContent.trim() === '\u2661') {
+              this.textContent = '\u2665';
+              this.style.color = '#C23B22';
+            } else {
+              this.textContent = '\u2661';
+              this.style.color = '';
+            }
+          });
+        }
+      }
+    });
+
+    categoryState.page++;
+    categoryState.isLoading = false;
+    if (loader) loader.style.display = 'none';
+
+    var toolbarCount = document.querySelector('.toolbar .result-count');
+    var displayed = Object.keys(categoryState.displayedIds).length;
+    if (toolbarCount) {
+      toolbarCount.textContent = 'Showing 1\u2013' + displayed + ' of ' + categoryState.totalProducts;
+    }
+
+    if (displayed >= categoryState.totalProducts) {
+      categoryState.allLoaded = true;
+      var endMsg = document.getElementById('scroll-end');
+      if (endMsg) endMsg.style.display = 'block';
+    } else {
+      if (sentinel) sentinel.style.display = 'block';
+    }
+  }, 400);
+}
+
+// === FILTER SIDEBAR INTERACTIVITY ===
+function initFilters() {
+  var filterGroups = document.querySelectorAll('.filter-group');
+  filterGroups.forEach(function(group) {
+    var checkboxes = group.querySelectorAll('input[type="checkbox"]');
+    var clearLink = group.querySelector('.clear-filters');
+
+    if (!checkboxes.length) return;
+
+    function updateClearState() {
+      if (!clearLink) return;
+      var anyChecked = false;
+      checkboxes.forEach(function(cb) { if (cb.checked) anyChecked = true; });
+      clearLink.style.opacity = anyChecked ? '1' : '0.4';
+      clearLink.style.pointerEvents = anyChecked ? 'auto' : 'none';
+    }
+
+    checkboxes.forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        var label = this.closest('.filter-option');
+        if (label) {
+          if (this.checked) {
+            label.classList.add('active');
+          } else {
+            label.classList.remove('active');
+          }
+        }
+        updateClearState();
+      });
+      var label = cb.closest('.filter-option');
+      if (label && cb.checked) label.classList.add('active');
+    });
+
+    if (clearLink) {
+      clearLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        checkboxes.forEach(function(cb) {
+          cb.checked = false;
+          var label = cb.closest('.filter-option');
+          if (label) label.classList.remove('active');
+        });
+        updateClearState();
+      });
+    }
+
+    updateClearState();
+  });
+}
+
+// === HEADER ICON BUTTONS ===
+function initHeaderIcons() {
+  var cartBtn = document.getElementById('cart-btn');
+  var accountBtn = document.getElementById('account-btn');
+  if (cartBtn) {
+    cartBtn.addEventListener('click', function() {
+      alert('Cart coming soon!');
+    });
+  }
+  if (accountBtn) {
+    accountBtn.addEventListener('click', function() {
+      alert('Account menu coming soon!');
+    });
+  }
 }
 
 // === MAIN ===
@@ -365,5 +532,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // === INIT SEARCH ===
   initSearchPage();
   initNavSearch();
+  initCategoryPage();
+  initFilters();
+  initHeaderIcons();
 
 });

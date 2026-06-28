@@ -23,7 +23,7 @@
   .nav-links a{transition:opacity 0.2s ease;} .nav-links a:hover{opacity:0.55;} .nav-links a.active{border-bottom:2px solid var(--black);padding-bottom:4px;}
   .nav-search{flex:1;max-width:340px;display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:100px;padding:11px 18px;font-size:14px;color:var(--gray);}
   .nav-search input{background:none;border:none;outline:none;font-family:inherit;font-size:14px;width:100%;color:var(--black);}
-  .nav-icons{display:flex;align-items:center;gap:20px;} .icon-btn{width:22px;height:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+  .nav-icons{display:flex;align-items:center;gap:20px;} .icon-btn{width:22px;height:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:none;border:none;padding:0;color:var(--black);} .icon-btn:hover{opacity:0.55;}
   .mobile-toggle{display:none;background:none;border:none;font-size:22px;cursor:pointer;}
   @media (max-width:980px){.nav-links{display:none;} .nav-search{display:none;} .mobile-toggle{display:block;}}
   .breadcrumb{padding-top:22px;padding-bottom:8px;font-size:13.5px;color:var(--gray);} .breadcrumb a:hover{color:var(--black);} .breadcrumb span{margin:0 8px;color:var(--gray-dim);}
@@ -68,6 +68,10 @@
   .footer-col ul{display:flex;flex-direction:column;gap:11px;} .footer-col a{font-size:14px;color:#C9C7C2;transition:color 0.2s ease;} .footer-col a:hover{color:var(--white);}
   .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;flex-wrap:wrap;gap:16px;}
   .footer-bottom p{font-size:12px;color:#7C7A75;line-height:1.6;max-width:680px;} .footer-copy{font-size:12px;color:#7C7A75;}
+  .filter-option.active{color:var(--black);font-weight:500;}
+  .loading-spinner{width:32px;height:32px;border:3px solid var(--line);border-top-color:var(--black);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .scroll-end{text-align:center;padding:40px 0;font-family:var(--font-head);font-size:15px;color:var(--gray);}
   @media (max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px;}} @media (max-width:560px){.footer-top{grid-template-columns:1fr;}}
 </style>
 </head>
@@ -76,8 +80,8 @@
 <header><nav class="wrap">
   <a href="/" class="logo">FINDSKART</a>
   <ul class="nav-links"><li><a href="category" class="active">Shop &#9662;</a></li><li><a href="category">On Sale</a></li><li><a href="category">New Arrivals</a></li><li><a href="about">About</a></li></ul>
-  <form class="nav-search">&#8981; <input type="text" placeholder="Search for products..." aria-label="Search"></form>
-  <div class="nav-icons"><span class="icon-btn">&#128722;</span><span class="icon-btn">&#128100;</span></div>
+  <form class="nav-search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Search for products..." aria-label="Search"></form>
+  <div class="nav-icons"><button class="icon-btn" aria-label="Cart" id="cart-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button><button class="icon-btn" aria-label="Account" id="account-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></button></div>
   <button class="mobile-toggle" aria-label="Open menu">&#9776;</button>
 </nav></header>
 <main class="wrap">
@@ -94,20 +98,13 @@
         <label class="filter-option"><input type="checkbox"> Chargers &amp; Cables</label>
       </div>
       <div class="filter-group"><h4>Price</h4><div class="price-range"><input type="text" placeholder="Min"><span style="color:var(--gray-dim);">&mdash;</span><input type="text" placeholder="Max"></div></div>
-      <div class="filter-group"><h4>Brand</h4>
+      <div class="filter-group"><h4>Brand <a href="#" class="clear-filters">Clear</a></h4>
         <label class="filter-option"><input type="checkbox"> Techloop</label>
         <label class="filter-option"><input type="checkbox"> Aura</label>
         <label class="filter-option"><input type="checkbox"> Pulse</label>
         <label class="filter-option"><input type="checkbox"> Lumen</label>
       </div>
-      <div class="filter-group"><h4>Color</h4><div class="color-swatches">
-        <span class="swatch selected" style="background:#0D0D0D;"></span>
-        <span class="swatch" style="background:#FFFFFF;"></span>
-        <span class="swatch" style="background:#C23B22;"></span>
-        <span class="swatch" style="background:#8A9A8E;"></span>
-        <span class="swatch" style="background:#C9A876;"></span>
-      </div></div>
-      <div class="filter-group" style="border-bottom:none;"><h4>Rating</h4>
+      <div class="filter-group" style="border-bottom:none;"><h4>Rating <a href="#" class="clear-filters">Clear</a></h4>
         <label class="filter-option"><input type="checkbox"> &#9733;&#9733;&#9733;&#9733;&#9733; &amp; up</label>
         <label class="filter-option"><input type="checkbox"> &#9733;&#9733;&#9733;&#9733;&#9734; &amp; up</label>
         <label class="filter-option"><input type="checkbox"> &#9733;&#9733;&#9733;&#9734;&#9734; &amp; up</label>
@@ -115,26 +112,12 @@
     </aside>
     <div>
       <div class="toolbar"><span class="result-count">Showing 1&ndash;9 of 128</span><span class="sort-select">Sort by: Most Popular &#9662;</span></div>
-      <div class="prod-grid">
-        <a href="product" class="prod-card"><div class="prod-img"><span class="prod-badge">-30%</span><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/2741119/pexels-photo-2741119.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Aura wireless headphones"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9733; <strong>4.8</strong> (212)</div><h3>Aura Wireless Headphones</h3><div class="prod-price"><span class="now">$89</span><span class="was">$129</span></div></a>
-        <a href="product" class="prod-card"><div class="prod-img"><span class="prod-badge new">New</span><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Smart home speaker"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.6</strong> (98)</div><h3>Echo Mini Smart Speaker</h3><div class="prod-price"><span class="now">$59</span></div></a>
-        <a href="product" class="prod-card"><div class="prod-img"><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/393047/pexels-photo-393047.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Smartwatch on wrist"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9733; <strong>4.9</strong> (340)</div><h3>Pulse Band SE</h3><div class="prod-price"><span class="now">$129</span></div></a>
-        <a href="product" class="prod-card"><div class="prod-img"><span class="prod-badge">-15%</span><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/3756879/pexels-photo-3756879.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Desk lamp"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.5</strong> (76)</div><h3>Lumen Pro Monitor Light</h3><div class="prod-price"><span class="now">$49</span><span class="was">$59</span></div></a>
-        <a href="product" class="prod-card"><div class="prod-img"><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/1591060/pexels-photo-1591060.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Wireless charger"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.3</strong> (54)</div><h3>Snap Wireless Charger</h3><div class="prod-price"><span class="now">$28</span></div></a>
-        <a href="product" class="prod-card"><div class="prod-img"><span class="prod-badge new">New</span><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Bluetooth earbuds"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9733; <strong>4.7</strong> (188)</div><h3>Aura Buds Pro</h3><div class="prod-price"><span class="now">$74</span></div></a>
-        <a href="product" class="prod-card"><div class="prod-img"><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Mechanical keyboard"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.6</strong> (122)</div><h3>Keystroke Mini Keyboard</h3><div class="prod-price"><span class="now">$95</span></div></a>
-        <a href="product" class="prod-card"><div class="prod-img"><span class="prod-badge">-20%</span><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/4071888/pexels-photo-4071888.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Portable power bank"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.4</strong> (67)</div><h3>Voltbrick 10K Power Bank</h3><div class="prod-price"><span class="now">$32</span><span class="was">$40</span></div></a>
-        <a href="product" class="prod-card"><div class="prod-img"><span class="wishlist-btn">&#9825;</span><img src="https://images.pexels.com/photos/4790268/pexels-photo-4790268.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Smart home hub"></div><div class="prod-rating">&#9733;&#9733;&#9733;&#9733;&#9734; <strong>4.5</strong> (91)</div><h3>Nexus Smart Hub</h3><div class="prod-price"><span class="now">$64</span></div></a>
+      <div class="prod-grid"></div>
+      <div id="scroll-sentinel" style="height:1px;"></div>
+      <div id="scroll-loader" style="display:none;justify-content:center;padding:32px 0;">
+        <div class="loading-spinner"></div>
       </div>
-      <div class="pagination">
-        <span class="page-btn">&larr;</span>
-        <span class="page-btn active">1</span>
-        <span class="page-btn">2</span>
-        <span class="page-btn">3</span>
-        <span class="page-btn">&hellip;</span>
-        <span class="page-btn">14</span>
-        <span class="page-btn">&rarr;</span>
-      </div>
+      <div id="scroll-end" class="scroll-end" style="display:none;">You've reached the end</div>
     </div>
   </div>
 </main>
