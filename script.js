@@ -20,6 +20,15 @@ var products = [
   { id: 18, name: "Hearth Ceramic Mug Set", img: "https://images.pexels.com/photos/1080696/pexels-photo-1080696.jpeg?auto=compress&cs=tinysrgb&w=500", price: 24, was: 30, rating: 4.4, reviews: 38, badge: "-20%", badgeClass: "", tags: ["mug","ceramic","kitchen","home","drinkware"] }
 ];
 
+// === CATEGORY TAG MAPPING ===
+var categoryTagMap = {
+  'headphones': ['headphones', 'earbuds', 'headset'],
+  'smart-home': ['speaker', 'smart home', 'hub'],
+  'wearables': ['smartwatch', 'wearable'],
+  'desk-setup': ['keyboard', 'desk lamp', 'monitor light'],
+  'chargers-cables': ['charger', 'power bank', 'charging pad']
+};
+
 // === FUZZY SEARCH ===
 function fuzzyMatch(query, text) {
   query = query.toLowerCase();
@@ -202,6 +211,7 @@ function initNavSearch() {
 // === CATEGORY PAGE INFINITE SCROLL ===
 var categoryState = {
   allProducts: [],
+  filteredProducts: [],
   displayedIds: {},
   page: 0,
   perPage: 9,
@@ -210,22 +220,74 @@ var categoryState = {
   totalProducts: 0
 };
 
+function getCategoriesFromURL() {
+  var params = new URLSearchParams(window.location.search);
+  var cat = params.get('category');
+  if (!cat) return [];
+  return cat.split(',').filter(function(c) { return c && categoryTagMap[c]; });
+}
+
+function syncCategoriesToURL(categories) {
+  var url = new URL(window.location);
+  if (categories.length === 0) {
+    url.searchParams.delete('category');
+  } else {
+    url.searchParams.set('category', categories.join(','));
+  }
+  window.history.replaceState({}, '', url);
+}
+
+function setCheckboxStates(categories) {
+  var checkboxes = document.querySelectorAll('.filter-group[data-filter="category"] input[type="checkbox"]');
+  checkboxes.forEach(function(cb) {
+    cb.checked = categories.indexOf(cb.dataset.category) !== -1;
+  });
+}
+
+function filterProductsByCategory(allProducts, categories) {
+  if (categories.length === 0) return allProducts.slice();
+  var matchTags = [];
+  categories.forEach(function(cat) {
+    var tags = categoryTagMap[cat];
+    if (tags) matchTags = matchTags.concat(tags);
+  });
+  return allProducts.filter(function(p) {
+    var productTags = p.tags.join(' ').toLowerCase();
+    for (var i = 0; i < matchTags.length; i++) {
+      if (productTags.indexOf(matchTags[i]) !== -1) return true;
+    }
+    return false;
+  });
+}
+
+function updateCategoryCounts() {
+  var pageHeadCount = document.querySelector('.page-head .result-count');
+  if (pageHeadCount) pageHeadCount.textContent = categoryState.totalProducts + ' products';
+  var toolbarCount = document.querySelector('.toolbar .result-count');
+  if (toolbarCount) {
+    var displayed = Object.keys(categoryState.displayedIds).length;
+    toolbarCount.textContent = 'Showing 1\u2013' + displayed + ' of ' + categoryState.totalProducts;
+  }
+}
+
 function initCategoryPage() {
   var grid = document.querySelector('.prod-grid');
   var sentinel = document.getElementById('scroll-sentinel');
   if (!grid || !sentinel) return;
 
-  grid.innerHTML = '';
+  var categories = getCategoriesFromURL();
+  setCheckboxStates(categories);
+
   categoryState.allProducts = products.slice();
-  categoryState.totalProducts = categoryState.allProducts.length;
+  categoryState.filteredProducts = filterProductsByCategory(products, categories);
   categoryState.displayedIds = {};
   categoryState.page = 0;
   categoryState.allLoaded = false;
   categoryState.isLoading = false;
+  categoryState.totalProducts = categoryState.filteredProducts.length;
 
-  var pageHeadCount = document.querySelector('.page-head .result-count');
-  if (pageHeadCount) pageHeadCount.textContent = categoryState.totalProducts + ' products';
-
+  grid.innerHTML = '';
+  updateCategoryCounts();
   loadMoreProducts();
 
   var observer = new IntersectionObserver(function(entries) {
@@ -233,7 +295,6 @@ function initCategoryPage() {
       loadMoreProducts();
     }
   }, { rootMargin: '400px' });
-
   observer.observe(sentinel);
 }
 
@@ -250,7 +311,7 @@ function loadMoreProducts() {
   setTimeout(function() {
     var start = categoryState.page * categoryState.perPage;
     var end = start + categoryState.perPage;
-    var newProducts = categoryState.allProducts.slice(start, end);
+    var newProducts = categoryState.filteredProducts.slice(start, end);
 
     var grid = document.querySelector('.prod-grid');
 
@@ -300,9 +361,88 @@ function loadMoreProducts() {
 }
 
 // === FILTER SIDEBAR INTERACTIVITY ===
+function getSelectedCategories() {
+  var selected = [];
+  var checkboxes = document.querySelectorAll('.filter-group[data-filter="category"] input[type="checkbox"]');
+  checkboxes.forEach(function(cb) {
+    if (cb.checked && cb.dataset.category) selected.push(cb.dataset.category);
+  });
+  return selected;
+}
+
+function applyCategoryFilter() {
+  var categories = getSelectedCategories();
+  categoryState.filteredProducts = filterProductsByCategory(categoryState.allProducts, categories);
+  categoryState.displayedIds = {};
+  categoryState.page = 0;
+  categoryState.allLoaded = false;
+  categoryState.isLoading = false;
+  categoryState.totalProducts = categoryState.filteredProducts.length;
+
+  var grid = document.querySelector('.prod-grid');
+  if (grid) grid.innerHTML = '';
+
+  var endMsg = document.getElementById('scroll-end');
+  if (endMsg) endMsg.style.display = 'none';
+
+  var sentinel = document.getElementById('scroll-sentinel');
+  if (sentinel) sentinel.style.display = 'block';
+
+  syncCategoriesToURL(categories);
+  updateCategoryCounts();
+  loadMoreProducts();
+}
+
 function initFilters() {
-  var filterGroups = document.querySelectorAll('.filter-group');
-  filterGroups.forEach(function(group) {
+  var categoryGroup = document.querySelector('.filter-group[data-filter="category"]');
+  if (categoryGroup) {
+    var checkboxes = categoryGroup.querySelectorAll('input[type="checkbox"]');
+    var clearLink = categoryGroup.querySelector('.clear-filters');
+
+    function updateCategoryClearState() {
+      if (!clearLink) return;
+      var anyChecked = false;
+      checkboxes.forEach(function(cb) { if (cb.checked) anyChecked = true; });
+      clearLink.style.opacity = anyChecked ? '1' : '0.4';
+      clearLink.style.pointerEvents = anyChecked ? 'auto' : 'none';
+    }
+
+    checkboxes.forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        var label = this.closest('.filter-option');
+        if (label) {
+          if (this.checked) {
+            label.classList.add('active');
+          } else {
+            label.classList.remove('active');
+          }
+        }
+        updateCategoryClearState();
+        applyCategoryFilter();
+      });
+      var label = cb.closest('.filter-option');
+      if (label && cb.checked) label.classList.add('active');
+    });
+
+    if (clearLink) {
+      clearLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        checkboxes.forEach(function(cb) {
+          cb.checked = false;
+          var label = cb.closest('.filter-option');
+          if (label) label.classList.remove('active');
+        });
+        updateCategoryClearState();
+        applyCategoryFilter();
+      });
+    }
+
+    updateCategoryClearState();
+  }
+
+  // Other filter groups (Brand, Rating) - active state only for now
+  var otherGroups = document.querySelectorAll('.filter-group:not([data-filter])');
+  otherGroups.forEach(function(group) {
     var checkboxes = group.querySelectorAll('input[type="checkbox"]');
     var clearLink = group.querySelector('.clear-filters');
 
