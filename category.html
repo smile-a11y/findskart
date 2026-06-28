@@ -97,17 +97,17 @@
         <label class="filter-option"><input type="checkbox" data-category="desk-setup"> Desk Setup</label>
         <label class="filter-option"><input type="checkbox" data-category="chargers-cables"> Chargers &amp; Cables</label>
       </div>
-      <div class="filter-group"><h4>Price</h4><div class="price-range"><input type="text" placeholder="Min"><span style="color:var(--gray-dim);">&mdash;</span><input type="text" placeholder="Max"></div></div>
-      <div class="filter-group"><h4>Brand <a href="#" class="clear-filters">Clear</a></h4>
-        <label class="filter-option"><input type="checkbox"> Techloop</label>
-        <label class="filter-option"><input type="checkbox"> Aura</label>
-        <label class="filter-option"><input type="checkbox"> Pulse</label>
-        <label class="filter-option"><input type="checkbox"> Lumen</label>
+      <div class="filter-group" data-filter="price"><h4>Price <a href="#" class="clear-filters">Clear</a></h4><div class="price-range"><input type="text" id="price-min" placeholder="Min"><span style="color:var(--gray-dim);">&mdash;</span><input type="text" id="price-max" placeholder="Max"></div></div>
+      <div class="filter-group" data-filter="brand"><h4>Brand <a href="#" class="clear-filters">Clear</a></h4>
+        <label class="filter-option"><input type="checkbox" data-brand="Techloop"> Techloop</label>
+        <label class="filter-option"><input type="checkbox" data-brand="Aura"> Aura</label>
+        <label class="filter-option"><input type="checkbox" data-brand="Pulse"> Pulse</label>
+        <label class="filter-option"><input type="checkbox" data-brand="Lumen"> Lumen</label>
       </div>
-      <div class="filter-group" style="border-bottom:none;"><h4>Rating <a href="#" class="clear-filters">Clear</a></h4>
-        <label class="filter-option"><input type="checkbox"> &#9733;&#9733;&#9733;&#9733;&#9733; &amp; up</label>
-        <label class="filter-option"><input type="checkbox"> &#9733;&#9733;&#9733;&#9733;&#9734; &amp; up</label>
-        <label class="filter-option"><input type="checkbox"> &#9733;&#9733;&#9733;&#9734;&#9734; &amp; up</label>
+      <div class="filter-group" style="border-bottom:none;" data-filter="rating"><h4>Rating <a href="#" class="clear-filters">Clear</a></h4>
+        <label class="filter-option"><input type="checkbox" data-rating="5"> &#9733;&#9733;&#9733;&#9733;&#9733; &amp; up</label>
+        <label class="filter-option"><input type="checkbox" data-rating="4"> &#9733;&#9733;&#9733;&#9733;&#9734; &amp; up</label>
+        <label class="filter-option"><input type="checkbox" data-rating="3"> &#9733;&#9733;&#9733;&#9734;&#9734; &amp; up</label>
       </div>
     </aside>
     <div>

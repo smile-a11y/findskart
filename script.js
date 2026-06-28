@@ -20,6 +20,15 @@ var products = [
   { id: 18, name: "Hearth Ceramic Mug Set", img: "https://images.pexels.com/photos/1080696/pexels-photo-1080696.jpeg?auto=compress&cs=tinysrgb&w=500", price: 24, was: 30, rating: 4.4, reviews: 38, badge: "-20%", badgeClass: "", tags: ["mug","ceramic","kitchen","home","drinkware"] }
 ];
 
+// === BRAND INFERENCE ===
+products.forEach(function(p) {
+  var n = p.name.toLowerCase();
+  if (n.indexOf('aura') === 0) p.brand = 'Aura';
+  else if (n.indexOf('pulse') === 0) p.brand = 'Pulse';
+  else if (n.indexOf('lumen') === 0) p.brand = 'Lumen';
+  else p.brand = 'Techloop';
+});
+
 // === CATEGORY TAG MAPPING ===
 var categoryTagMap = {
   'headphones': ['headphones', 'earbuds', 'headset'],
@@ -220,47 +229,111 @@ var categoryState = {
   totalProducts: 0
 };
 
-function getCategoriesFromURL() {
+// === UNIFIED FILTER SYSTEM ===
+function getFiltersFromURL() {
   var params = new URLSearchParams(window.location.search);
-  var cat = params.get('category');
-  if (!cat) return [];
-  return cat.split(',').filter(function(c) { return c && categoryTagMap[c]; });
+  var categories = (params.get('category') || '').split(',').filter(Boolean);
+  var brands = (params.get('brand') || '').split(',').filter(Boolean);
+  var rating = parseFloat(params.get('rating')) || 0;
+  var priceMin = params.has('priceMin') ? parseFloat(params.get('priceMin')) : null;
+  var priceMax = params.has('priceMax') ? parseFloat(params.get('priceMax')) : null;
+  return { categories: categories, brands: brands, rating: rating, priceMin: priceMin, priceMax: priceMax };
 }
 
-function syncCategoriesToURL(categories) {
+function syncFiltersToURL(filters) {
   var url = new URL(window.location);
-  if (categories.length === 0) {
-    url.searchParams.delete('category');
-  } else {
-    url.searchParams.set('category', categories.join(','));
-  }
+  url.searchParams.delete('category');
+  url.searchParams.delete('brand');
+  url.searchParams.delete('rating');
+  url.searchParams.delete('priceMin');
+  url.searchParams.delete('priceMax');
+  if (filters.categories.length) url.searchParams.set('category', filters.categories.join(','));
+  if (filters.brands.length) url.searchParams.set('brand', filters.brands.join(','));
+  if (filters.rating) url.searchParams.set('rating', filters.rating);
+  if (filters.priceMin !== null) url.searchParams.set('priceMin', filters.priceMin);
+  if (filters.priceMax !== null) url.searchParams.set('priceMax', filters.priceMax);
   window.history.replaceState({}, '', url);
 }
 
-function setCheckboxStates(categories) {
-  var checkboxes = document.querySelectorAll('.filter-group[data-filter="category"] input[type="checkbox"]');
-  checkboxes.forEach(function(cb) {
-    cb.checked = categories.indexOf(cb.dataset.category) !== -1;
+function setFiltersOnDOM(filters) {
+  document.querySelectorAll('.filter-group[data-filter="category"] input[type="checkbox"]').forEach(function(cb) {
+    cb.checked = filters.categories.indexOf(cb.dataset.category) !== -1;
+    var label = cb.closest('.filter-option');
+    if (label) label.classList.toggle('active', cb.checked);
   });
+  document.querySelectorAll('.filter-group[data-filter="brand"] input[type="checkbox"]').forEach(function(cb) {
+    cb.checked = filters.brands.indexOf(cb.dataset.brand) !== -1;
+    var label = cb.closest('.filter-option');
+    if (label) label.classList.toggle('active', cb.checked);
+  });
+  document.querySelectorAll('.filter-group[data-filter="rating"] input[type="checkbox"]').forEach(function(cb) {
+    var r = cb.dataset.rating ? parseFloat(cb.dataset.rating) : 0;
+    cb.checked = (filters.rating === r);
+    var label = cb.closest('.filter-option');
+    if (label) label.classList.toggle('active', cb.checked);
+  });
+  var minInput = document.getElementById('price-min');
+  var maxInput = document.getElementById('price-max');
+  if (minInput) minInput.value = filters.priceMin !== null ? filters.priceMin : '';
+  if (maxInput) maxInput.value = filters.priceMax !== null ? filters.priceMax : '';
 }
 
-function filterProductsByCategory(allProducts, categories) {
-  if (categories.length === 0) return allProducts.slice();
-  var matchTags = [];
-  categories.forEach(function(cat) {
-    var tags = categoryTagMap[cat];
-    if (tags) matchTags = matchTags.concat(tags);
+function readFiltersFromDOM() {
+  var categories = [];
+  document.querySelectorAll('.filter-group[data-filter="category"] input[type="checkbox"]').forEach(function(cb) {
+    if (cb.checked && cb.dataset.category) categories.push(cb.dataset.category);
   });
-  return allProducts.filter(function(p) {
-    var productTags = p.tags.join(' ').toLowerCase();
-    for (var i = 0; i < matchTags.length; i++) {
-      if (productTags.indexOf(matchTags[i]) !== -1) return true;
+  var brands = [];
+  document.querySelectorAll('.filter-group[data-filter="brand"] input[type="checkbox"]').forEach(function(cb) {
+    if (cb.checked && cb.dataset.brand) brands.push(cb.dataset.brand);
+  });
+  var rating = 0;
+  document.querySelectorAll('.filter-group[data-filter="rating"] input[type="checkbox"]').forEach(function(cb) {
+    if (cb.checked && cb.dataset.rating) {
+      var r = parseFloat(cb.dataset.rating);
+      if (rating === 0 || r < rating) rating = r;
     }
-    return false;
   });
+  var minInput = document.getElementById('price-min');
+  var maxInput = document.getElementById('price-max');
+  var priceMin = (minInput && minInput.value !== '') ? parseFloat(minInput.value) : null;
+  var priceMax = (maxInput && maxInput.value !== '') ? parseFloat(maxInput.value) : null;
+  return { categories: categories, brands: brands, rating: rating, priceMin: priceMin, priceMax: priceMax };
 }
 
-function updateCategoryCounts() {
+function filterProducts(allProducts, filters) {
+  var result = allProducts.slice();
+  if (filters.categories.length) {
+    var matchTags = [];
+    filters.categories.forEach(function(cat) {
+      var tags = categoryTagMap[cat];
+      if (tags) matchTags = matchTags.concat(tags);
+    });
+    result = result.filter(function(p) {
+      var pt = p.tags.join(' ').toLowerCase();
+      for (var i = 0; i < matchTags.length; i++) {
+        if (pt.indexOf(matchTags[i]) !== -1) return true;
+      }
+      return false;
+    });
+  }
+  if (filters.brands.length) {
+    var bl = filters.brands.map(function(b) { return b.toLowerCase(); });
+    result = result.filter(function(p) { return bl.indexOf(p.brand.toLowerCase()) !== -1; });
+  }
+  if (filters.rating) {
+    result = result.filter(function(p) { return p.rating >= filters.rating; });
+  }
+  if (filters.priceMin !== null) {
+    result = result.filter(function(p) { return p.price >= filters.priceMin; });
+  }
+  if (filters.priceMax !== null) {
+    result = result.filter(function(p) { return p.price <= filters.priceMax; });
+  }
+  return result;
+}
+
+function updateFilterCounts() {
   var pageHeadCount = document.querySelector('.page-head .result-count');
   if (pageHeadCount) pageHeadCount.textContent = categoryState.totalProducts + ' products';
   var toolbarCount = document.querySelector('.toolbar .result-count');
@@ -270,26 +343,41 @@ function updateCategoryCounts() {
   }
 }
 
-function initCategoryPage() {
-  var grid = document.querySelector('.prod-grid');
-  var sentinel = document.getElementById('scroll-sentinel');
-  if (!grid || !sentinel) return;
-
-  var categories = getCategoriesFromURL();
-  setCheckboxStates(categories);
-
-  categoryState.allProducts = products.slice();
-  categoryState.filteredProducts = filterProductsByCategory(products, categories);
+function applyAllFilters() {
+  var filters = readFiltersFromDOM();
+  categoryState.filteredProducts = filterProducts(categoryState.allProducts, filters);
   categoryState.displayedIds = {};
   categoryState.page = 0;
   categoryState.allLoaded = false;
   categoryState.isLoading = false;
   categoryState.totalProducts = categoryState.filteredProducts.length;
-
-  grid.innerHTML = '';
-  updateCategoryCounts();
+  var grid = document.querySelector('.prod-grid');
+  if (grid) grid.innerHTML = '';
+  var endMsg = document.getElementById('scroll-end');
+  if (endMsg) endMsg.style.display = 'none';
+  var sentinel = document.getElementById('scroll-sentinel');
+  if (sentinel) sentinel.style.display = 'block';
+  syncFiltersToURL(filters);
+  updateFilterCounts();
   loadMoreProducts();
+}
 
+function initCategoryPage() {
+  var grid = document.querySelector('.prod-grid');
+  var sentinel = document.getElementById('scroll-sentinel');
+  if (!grid || !sentinel) return;
+  var filters = getFiltersFromURL();
+  setFiltersOnDOM(filters);
+  categoryState.allProducts = products.slice();
+  categoryState.filteredProducts = filterProducts(products, filters);
+  categoryState.displayedIds = {};
+  categoryState.page = 0;
+  categoryState.allLoaded = false;
+  categoryState.isLoading = false;
+  categoryState.totalProducts = categoryState.filteredProducts.length;
+  grid.innerHTML = '';
+  updateFilterCounts();
+  loadMoreProducts();
   var observer = new IntersectionObserver(function(entries) {
     if (entries[0].isIntersecting && !categoryState.isLoading && !categoryState.allLoaded) {
       loadMoreProducts();
@@ -300,21 +388,16 @@ function initCategoryPage() {
 
 function loadMoreProducts() {
   if (categoryState.isLoading || categoryState.allLoaded) return;
-
   categoryState.isLoading = true;
   var loader = document.getElementById('scroll-loader');
   if (loader) loader.style.display = 'flex';
-
   var sentinel = document.getElementById('scroll-sentinel');
   if (sentinel) sentinel.style.display = 'none';
-
   setTimeout(function() {
     var start = categoryState.page * categoryState.perPage;
     var end = start + categoryState.perPage;
     var newProducts = categoryState.filteredProducts.slice(start, end);
-
     var grid = document.querySelector('.prod-grid');
-
     newProducts.forEach(function(p) {
       if (!categoryState.displayedIds[p.id]) {
         categoryState.displayedIds[p.id] = true;
@@ -322,7 +405,6 @@ function loadMoreProducts() {
         temp.innerHTML = renderProductCard(p);
         var card = temp.firstElementChild;
         grid.appendChild(card);
-
         var wishBtn = card.querySelector('.wishlist-btn');
         if (wishBtn) {
           wishBtn.addEventListener('click', function(e) {
@@ -339,17 +421,14 @@ function loadMoreProducts() {
         }
       }
     });
-
     categoryState.page++;
     categoryState.isLoading = false;
     if (loader) loader.style.display = 'none';
-
     var toolbarCount = document.querySelector('.toolbar .result-count');
     var displayed = Object.keys(categoryState.displayedIds).length;
     if (toolbarCount) {
       toolbarCount.textContent = 'Showing 1\u2013' + displayed + ' of ' + categoryState.totalProducts;
     }
-
     if (displayed >= categoryState.totalProducts) {
       categoryState.allLoaded = true;
       var endMsg = document.getElementById('scroll-end');
@@ -361,131 +440,70 @@ function loadMoreProducts() {
 }
 
 // === FILTER SIDEBAR INTERACTIVITY ===
-function getSelectedCategories() {
-  var selected = [];
-  var checkboxes = document.querySelectorAll('.filter-group[data-filter="category"] input[type="checkbox"]');
-  checkboxes.forEach(function(cb) {
-    if (cb.checked && cb.dataset.category) selected.push(cb.dataset.category);
+function updateClearStates() {
+  document.querySelectorAll('.filter-group').forEach(function(group) {
+    var clearLink = group.querySelector('.clear-filters');
+    if (!clearLink) return;
+    var anyActive = false;
+    group.querySelectorAll('input[type="checkbox"]').forEach(function(cb) {
+      if (cb.checked) anyActive = true;
+    });
+    if (group.dataset.filter === 'price') {
+      var minInput = document.getElementById('price-min');
+      var maxInput = document.getElementById('price-max');
+      if ((minInput && minInput.value !== '') || (maxInput && maxInput.value !== '')) anyActive = true;
+    }
+    clearLink.style.opacity = anyActive ? '1' : '0.4';
+    clearLink.style.pointerEvents = anyActive ? 'auto' : 'none';
   });
-  return selected;
-}
-
-function applyCategoryFilter() {
-  var categories = getSelectedCategories();
-  categoryState.filteredProducts = filterProductsByCategory(categoryState.allProducts, categories);
-  categoryState.displayedIds = {};
-  categoryState.page = 0;
-  categoryState.allLoaded = false;
-  categoryState.isLoading = false;
-  categoryState.totalProducts = categoryState.filteredProducts.length;
-
-  var grid = document.querySelector('.prod-grid');
-  if (grid) grid.innerHTML = '';
-
-  var endMsg = document.getElementById('scroll-end');
-  if (endMsg) endMsg.style.display = 'none';
-
-  var sentinel = document.getElementById('scroll-sentinel');
-  if (sentinel) sentinel.style.display = 'block';
-
-  syncCategoriesToURL(categories);
-  updateCategoryCounts();
-  loadMoreProducts();
 }
 
 function initFilters() {
-  var categoryGroup = document.querySelector('.filter-group[data-filter="category"]');
-  if (categoryGroup) {
-    var checkboxes = categoryGroup.querySelectorAll('input[type="checkbox"]');
-    var clearLink = categoryGroup.querySelector('.clear-filters');
-
-    function updateCategoryClearState() {
-      if (!clearLink) return;
-      var anyChecked = false;
-      checkboxes.forEach(function(cb) { if (cb.checked) anyChecked = true; });
-      clearLink.style.opacity = anyChecked ? '1' : '0.4';
-      clearLink.style.pointerEvents = anyChecked ? 'auto' : 'none';
-    }
-
-    checkboxes.forEach(function(cb) {
-      cb.addEventListener('change', function() {
-        var label = this.closest('.filter-option');
-        if (label) {
-          if (this.checked) {
-            label.classList.add('active');
-          } else {
-            label.classList.remove('active');
-          }
-        }
-        updateCategoryClearState();
-        applyCategoryFilter();
-      });
-      var label = cb.closest('.filter-option');
-      if (label && cb.checked) label.classList.add('active');
+  document.querySelectorAll('.filter-group[data-filter] input[type="checkbox"]').forEach(function(cb) {
+    cb.addEventListener('change', function() {
+      var label = this.closest('.filter-option');
+      if (label) label.classList.toggle('active', this.checked);
+      updateClearStates();
+      applyAllFilters();
     });
-
-    if (clearLink) {
-      clearLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        checkboxes.forEach(function(cb) {
-          cb.checked = false;
-          var label = cb.closest('.filter-option');
-          if (label) label.classList.remove('active');
-        });
-        updateCategoryClearState();
-        applyCategoryFilter();
-      });
-    }
-
-    updateCategoryClearState();
-  }
-
-  // Other filter groups (Brand, Rating) - active state only for now
-  var otherGroups = document.querySelectorAll('.filter-group:not([data-filter])');
-  otherGroups.forEach(function(group) {
-    var checkboxes = group.querySelectorAll('input[type="checkbox"]');
-    var clearLink = group.querySelector('.clear-filters');
-
-    if (!checkboxes.length) return;
-
-    function updateClearState() {
-      if (!clearLink) return;
-      var anyChecked = false;
-      checkboxes.forEach(function(cb) { if (cb.checked) anyChecked = true; });
-      clearLink.style.opacity = anyChecked ? '1' : '0.4';
-      clearLink.style.pointerEvents = anyChecked ? 'auto' : 'none';
-    }
-
-    checkboxes.forEach(function(cb) {
-      cb.addEventListener('change', function() {
-        var label = this.closest('.filter-option');
-        if (label) {
-          if (this.checked) {
-            label.classList.add('active');
-          } else {
-            label.classList.remove('active');
-          }
-        }
-        updateClearState();
-      });
-      var label = cb.closest('.filter-option');
-      if (label && cb.checked) label.classList.add('active');
-    });
-
-    if (clearLink) {
-      clearLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        checkboxes.forEach(function(cb) {
-          cb.checked = false;
-          var label = cb.closest('.filter-option');
-          if (label) label.classList.remove('active');
-        });
-        updateClearState();
-      });
-    }
-
-    updateClearState();
   });
+  var minInput = document.getElementById('price-min');
+  var maxInput = document.getElementById('price-max');
+  function onPriceChange() {
+    updateClearStates();
+    applyAllFilters();
+  }
+  if (minInput) {
+    minInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); onPriceChange(); } });
+    minInput.addEventListener('blur', onPriceChange);
+  }
+  if (maxInput) {
+    maxInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); onPriceChange(); } });
+    maxInput.addEventListener('blur', onPriceChange);
+  }
+  document.querySelectorAll('.filter-group').forEach(function(group) {
+    var clearLink = group.querySelector('.clear-filters');
+    if (!clearLink) return;
+    clearLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      var filterType = group.dataset.filter;
+      if (filterType === 'category' || filterType === 'brand' || filterType === 'rating') {
+        group.querySelectorAll('input[type="checkbox"]').forEach(function(cb) {
+          cb.checked = false;
+          var label = cb.closest('.filter-option');
+          if (label) label.classList.remove('active');
+        });
+      } else if (filterType === 'price') {
+        var minIn = document.getElementById('price-min');
+        var maxIn = document.getElementById('price-max');
+        if (minIn) minIn.value = '';
+        if (maxIn) maxIn.value = '';
+      }
+      updateClearStates();
+      applyAllFilters();
+    });
+  });
+  updateClearStates();
 }
 
 // === HEADER ICON BUTTONS ===
